@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="com.example.android.opinius.TipeJawabActivity">
+
+    <TextView
+        android:id="@+id/judulTipeJawab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/judulTipeJawab"
+        android:textSize="@dimen/ukuranTipeJawab" />
+
+    <RadioGroup
+        android:id="@+id/tipeJawab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/judulTipeJawab">
+
+        <RadioButton
+            android:id="@+id/tipeIsiian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/isiian" />
+
+        <RadioButton
+            android:id="@+id/tipeSatuJawaban"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pilih_satu" />
+
+        <RadioButton
+            android:id="@+id/tipeBanyakJawaban"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pilih_banyak" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/lanjut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/tombol_lanjut" />
+
+
+</RelativeLayout>
