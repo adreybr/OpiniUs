@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.tambah_survey:
                 Intent intent = new Intent(MainActivity.this, TambahSurveyActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 101);
                 return true;
             case R.id.lihat_survey:
                 Intent intent1 = new Intent(MainActivity.this, SurveyTerjawabActivity.class);
@@ -33,6 +34,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101){
+            if(resultCode == RESULT_OK){
+                Toast.makeText(getApplicationContext(),"Survey berhasil disimpan",Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -21,14 +21,18 @@
             android:label="Tambah Survey"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".TambahPertanyaan"
-            android:label="Tambah Pertanyaan"
+            android:name=".ListPertanyaan"
+            android:label="List Pertanyaan"
             android:parentActivityName=".TambahSurveyActivity" />
         <activity
             android:name=".TipeJawabActivity"
-            android:parentActivityName=".TambahPertanyaan"
-            android:label="Tipe Pertanyaan"/>
-        <activity android:name=".questionForm.FormIsianActivity" />
+            android:label="Tipe Pertanyaan"
+            android:parentActivityName=".ListPertanyaan" />
+
+
+        <activity
+            android:name=".questionForm.FormIsianActivity"
+            android:parentActivityName=".TipeJawabActivity" />
         <activity android:name=".questionForm.FormSatuJawabanActivity" />
         <activity android:name=".questionForm.FormBanyakJawabanActivity" />
         <activity

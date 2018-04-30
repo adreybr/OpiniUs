@@ -22,22 +22,22 @@
 
 
     <Button
-        android:id="@+id/batal"
+        android:id="@+id/simpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tombolSimpan"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="batal"/>
+        android:onClick="simpanIsian"/>
     <Button
-        android:id="@+id/simpan"
+        android:id="@+id/batal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tombolBatal"
         android:layout_toLeftOf="@id/batal"
         android:layout_toStartOf="@id/batal"
         android:layout_alignParentBottom="true"
-        android:onClick="simpan"/>
+        android:onClick="batal"/>
 
 </RelativeLayout>

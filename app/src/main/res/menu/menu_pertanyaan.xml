@@ -8,4 +8,10 @@
         android:title="@string/tambah_pertanyaan"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/save_survey"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/save_survey"
+        app:showAsAction="ifRoom" />
+
 </menu>
