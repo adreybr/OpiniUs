@@ -5,9 +5,8 @@
     <string name="isian">Isian</string>
     <string name="pilih_satu">Pilih Satu</string>
     <string name="pilih_banyak">Pilih Banyak</string>
-    <string name="tombol_lanjut">Next</string>
-    <string name="tombolBatal">Batal</string>
-    <string name="tombolSimpan">Simpan</string>
+    <string name="tombol_lanjut">Lanjut</string>
+    <string name="tombol_batal">Batal</string>
     <string name="jawaban">Jawaban :</string>
     <string name="pertanyaan">Pertanyaan :</string>
     <string name="tambah_survey">Tambah Survey</string>
@@ -15,4 +14,5 @@
     <string name="save_survey">Save</string>
     <string name="tambah_pertanyaan">Tambah Pertanyaan</string>
     <string name="masukkan_judul_survey">Masukkan Judul Survey</string>
+    <string name="tombol_simpan">Simpan</string>
 </resources>

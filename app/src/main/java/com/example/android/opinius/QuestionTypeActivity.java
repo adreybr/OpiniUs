@@ -8,13 +8,12 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
-import com.example.android.opinius.questionForm.FormBanyakJawabanActivity;
-import com.example.android.opinius.questionForm.FormIsianActivity;
-import com.example.android.opinius.questionForm.FormSatuJawabanActivity;
+import com.example.android.opinius.questionForm.FormMultipleAnswerActivity;
+import com.example.android.opinius.questionForm.FormShortAnswerActivity;
+import com.example.android.opinius.questionForm.FormSingleAnswerActivity;
 
-public class TipeJawabActivity extends AppCompatActivity {
+public class QuestionTypeActivity extends AppCompatActivity {
 
     private RadioGroup radioGroup;
     private RadioButton radioButton;
@@ -26,10 +25,10 @@ public class TipeJawabActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tipe_jawab);
+        setContentView(R.layout.activity_question_type);
 
         Intent intent = getIntent();
-        mJudulSurvey = intent.getStringExtra(ListPertanyaan.JUDUL_SURVEY);
+        mJudulSurvey = intent.getStringExtra(QuestionList.JUDUL_SURVEY);
 
         addListenerOnButton();
     }
@@ -51,15 +50,17 @@ public class TipeJawabActivity extends AppCompatActivity {
                 radioButton = (RadioButton) findViewById(selectedId);
 
                 if (selectedId == R.id.tipeIsian) {
-                    Intent intentIsian = new Intent(TipeJawabActivity.this, FormIsianActivity.class);
+                    Intent intentIsian = new Intent(QuestionTypeActivity.this, FormShortAnswerActivity.class);
                     intentIsian.putExtra(JUDUL_SURVEY, mJudulSurvey);
                     startActivityForResult(intentIsian, 202);
                 } else if (selectedId == R.id.tipeSatuJawaban) {
-                    Intent intentSatu = new Intent(TipeJawabActivity.this, FormSatuJawabanActivity.class);
-                    startActivity(intentSatu);
+                    Intent intentSatu = new Intent(QuestionTypeActivity.this, FormSingleAnswerActivity.class);
+                    intentSatu.putExtra(JUDUL_SURVEY, mJudulSurvey);
+                    startActivityForResult(intentSatu, 202);
                 } else if (selectedId == R.id.tipeBanyakJawaban) {
-                    Intent intentBanyak = new Intent(TipeJawabActivity.this, FormBanyakJawabanActivity.class);
-                    startActivity(intentBanyak);
+                    Intent intentBanyak = new Intent(QuestionTypeActivity.this, FormMultipleAnswerActivity.class);
+                    intentBanyak.putExtra(JUDUL_SURVEY, mJudulSurvey);
+                    startActivityForResult(intentBanyak, 202);
                 }
             }
 

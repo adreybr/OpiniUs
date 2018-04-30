@@ -8,18 +8,18 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ListPertanyaan extends AppCompatActivity {
+public class QuestionList extends AppCompatActivity {
     private TextView mJudulSurvey;
     public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_pertanyaan);
+        setContentView(R.layout.activity_question_list);
 
         Intent intent = getIntent();
         String message =
-                intent.getStringExtra(TambahSurveyActivity.JUDUL_SURVEY);
+                intent.getStringExtra(AddSurveyActivity.JUDUL_SURVEY);
         mJudulSurvey = (TextView) findViewById(R.id.judul_survey);
         mJudulSurvey.setText(message);
 
@@ -27,7 +27,7 @@ public class ListPertanyaan extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_pertanyaan, menu);
+        getMenuInflater().inflate(R.menu.menu_question_list, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -35,7 +35,7 @@ public class ListPertanyaan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.tambah_pertanyaan:
-                Intent intent = new Intent(ListPertanyaan.this, TipeJawabActivity.class);
+                Intent intent = new Intent(QuestionList.this, QuestionTypeActivity.class);
                 intent.putExtra(JUDUL_SURVEY, mJudulSurvey.getText().toString());
                 startActivityForResult(intent, 202);
                 return true;

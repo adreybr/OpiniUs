@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context="com.example.android.opinius.questionForm.FormBanyakJawabanActivity">
+    tools:context="com.example.android.opinius.questionForm.FormMultipleAnswerActivity">
 
     <TextView
         android:id="@+id/judul"
@@ -77,21 +77,21 @@
         android:layout_below="@id/checkbox4"/>
 
     <Button
-        android:id="@+id/batal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tombolSimpan"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="batal"/>
-    <Button
         android:id="@+id/simpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tombolBatal"
-        android:layout_toLeftOf="@id/batal"
-        android:layout_toStartOf="@id/batal"
+        android:text="@string/tombol_simpan"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:onClick="simpan"/>
+    <Button
+        android:id="@+id/batal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tombol_batal"
+        android:layout_toLeftOf="@id/simpan"
+        android:layout_toStartOf="@id/simpan"
+        android:layout_alignParentBottom="true"
+        android:onClick="batal"/>
 </RelativeLayout>

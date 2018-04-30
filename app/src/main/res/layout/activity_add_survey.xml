@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.example.android.opinius.TambahSurveyActivity">
+    tools:context="com.example.android.opinius.AddSurveyActivity">
 
     <TextView
         android:id="@+id/judul"
@@ -28,5 +28,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:onClick="tambahPertanyaan"
-        android:text="@string/tambah_pertanyaan" />
+        android:text="@string/tombol_simpan" />
 </LinearLayout>

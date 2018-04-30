@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.tambah_survey:
-                Intent intent = new Intent(MainActivity.this, TambahSurveyActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddSurveyActivity.class);
                 startActivityForResult(intent, 101);
                 return true;
             case R.id.lihat_survey:
-                Intent intent1 = new Intent(MainActivity.this, SurveyTerjawabActivity.class);
+                Intent intent1 = new Intent(MainActivity.this, ViewSurveyActivity.class);
                 startActivity(intent1);
                 return true;
             default:

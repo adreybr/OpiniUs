@@ -17,26 +17,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TambahSurveyActivity"
+            android:name=".AddSurveyActivity"
             android:label="Tambah Survey"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".ListPertanyaan"
+            android:name=".QuestionList"
             android:label="List Pertanyaan"
-            android:parentActivityName=".TambahSurveyActivity" />
+            android:parentActivityName=".AddSurveyActivity" />
         <activity
-            android:name=".TipeJawabActivity"
+            android:name=".QuestionTypeActivity"
             android:label="Tipe Pertanyaan"
-            android:parentActivityName=".ListPertanyaan" />
+            android:parentActivityName=".QuestionList" />
 
 
         <activity
-            android:name=".questionForm.FormIsianActivity"
-            android:parentActivityName=".TipeJawabActivity" />
-        <activity android:name=".questionForm.FormSatuJawabanActivity" />
-        <activity android:name=".questionForm.FormBanyakJawabanActivity" />
+            android:name=".questionForm.FormShortAnswerActivity"
+            android:label="Isian Singkat"
+            android:parentActivityName=".QuestionTypeActivity" />
         <activity
-            android:name=".SurveyTerjawabActivity"
+            android:name=".questionForm.FormSingleAnswerActivity"
+            android:label="Pilih Satu"
+            android:parentActivityName=".QuestionTypeActivity" />
+        <activity
+            android:name=".questionForm.FormMultipleAnswerActivity"
+            android:label="Pilih Banyak"
+            android:parentActivityName=".QuestionTypeActivity" />
+
+        <activity
+            android:name=".ViewSurveyActivity"
             android:parentActivityName=".MainActivity" />
 
     </application>

@@ -6,28 +6,28 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.android.opinius.R;
-import com.example.android.opinius.TipeJawabActivity;
+import com.example.android.opinius.QuestionTypeActivity;
 
-public class FormIsianActivity extends AppCompatActivity {
+public class FormSingleAnswerActivity extends AppCompatActivity {
     private String mJudulSurvey;
     public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_form_isian);
+        setContentView(R.layout.activity_form_single_answer);
 
         Intent intent = getIntent();
-        mJudulSurvey = intent.getStringExtra(TipeJawabActivity.JUDUL_SURVEY);
-
+        mJudulSurvey = intent.getStringExtra(QuestionTypeActivity.JUDUL_SURVEY);
     }
 
     public void batal(View view) {
+        setResult(RESULT_CANCELED);
+        finish();
     }
 
-    public void simpanIsian(View view) {
+    public void simpan(View view) {
         Intent replyIntent = new Intent();
-//        startActivity(replyIntent);
         setResult(RESULT_OK, replyIntent);
         finish();
     }
