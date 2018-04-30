@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="save"
-        android:id="@+id/saveSurvei"
-        app:showAsAction="always"
-        />
+        android:id="@+id/save_survey"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/save_survey"
+        app:showAsAction="always" />
 
 </menu>
