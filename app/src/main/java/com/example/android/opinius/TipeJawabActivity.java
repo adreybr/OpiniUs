@@ -9,9 +9,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.view.View.OnClickListener;
 
-import com.example.android.opinius.QuestionForm.FormBanyakJawabanActivity;
-import com.example.android.opinius.QuestionForm.FormIsianActivity;
-import com.example.android.opinius.QuestionForm.FormSatuJawabanActivity;
+import com.example.android.opinius.questionForm.FormBanyakJawabanActivity;
+import com.example.android.opinius.questionForm.FormIsianActivity;
+import com.example.android.opinius.questionForm.FormSatuJawabanActivity;
 
 public class TipeJawabActivity extends AppCompatActivity {
 

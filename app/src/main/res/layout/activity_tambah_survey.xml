@@ -4,36 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.example.android.opinius.TambahSurveyActivity"
-    android:orientation="vertical">
+    tools:context="com.example.android.opinius.TambahSurveyActivity">
 
     <TextView
         android:id="@+id/judul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/judul"
-        android:textSize="@dimen/ukuranJudul"
-        />
+        android:textSize="@dimen/ukuranJudul" />
 
     <EditText
         android:id="@+id/isiJudul"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:hint="@string/masukkan_judul_survey"
+        android:inputType="text" />
 
-    <ListView
-        android:id="@+id/list_pertanyaan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </ListView>
     <Button
         android:id="@+id/tambahPertanyaan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:text="Tambah Pertanyaan"
         android:onClick="tambahPertanyaan"
-        />
+        android:text="@string/tambah_pertanyaan" />
 </LinearLayout>

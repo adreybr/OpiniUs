@@ -1,4 +1,4 @@
-package com.example.android.opinius;
+package com.example.android.opinius.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

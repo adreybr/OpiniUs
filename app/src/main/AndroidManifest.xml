@@ -16,13 +16,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TambahSurveyActivity" />
-        <activity android:name=".TipeJawabActivity" />
-        <activity android:name=".QuestionForm.FormIsianActivity" />
-        <activity android:name=".QuestionForm.FormSatuJawabanActivity" />
-        <activity android:name=".QuestionForm.FormBanyakJawabanActivity" />
-        <activity android:name=".survey_terjawabActivity" />
-        <activity android:name=".SurveiTerjawabActivity"></activity>
+        <activity
+            android:name=".TambahSurveyActivity"
+            android:label="Tambah Survey"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".TambahPertanyaan"
+            android:label="Tambah Pertanyaan"
+            android:parentActivityName=".TambahSurveyActivity" />
+        <activity
+            android:name=".TipeJawabActivity"
+            android:parentActivityName=".TambahPertanyaan"
+            android:label="Tipe Pertanyaan"/>
+        <activity android:name=".questionForm.FormIsianActivity" />
+        <activity android:name=".questionForm.FormSatuJawabanActivity" />
+        <activity android:name=".questionForm.FormBanyakJawabanActivity" />
+        <activity
+            android:name=".SurveyTerjawabActivity"
+            android:parentActivityName=".MainActivity" />
+
     </application>
 
 </manifest>

@@ -8,7 +8,7 @@
         android:title="@string/tambah_survey"
         app:showAsAction="always" />
     <item
-        android:id="@+id/lihatSurvey"
+        android:id="@+id/lihat_survey"
         android:icon="@android:drawable/ic_menu_view"
         android:title="@string/lihat_survey"
         app:showAsAction="ifRoom" />

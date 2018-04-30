@@ -1,4 +1,4 @@
-package com.example.android.opinius;
+package com.example.android.opinius.database;
 
 import android.provider.BaseColumns;
 

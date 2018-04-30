@@ -24,7 +24,7 @@
             android:id="@+id/tipeIsiian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/isiian" />
+            android:text="@string/isian" />
 
         <RadioButton
             android:id="@+id/tipeSatuJawaban"
