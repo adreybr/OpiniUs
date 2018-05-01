@@ -5,94 +5,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context="com.example.android.opinius.questionForm.FormSingleAnswerActivity">
-
-    <TextView
-        android:id="@+id/judul"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pertanyaan"
-        android:textSize="@dimen/ukuranJudul" />
+    tools:context=".view.questionForm.FormSingleAnswerActivity">
 
     <EditText
-        android:id="@+id/isiPertanyaan"
+        android:id="@+id/question_content_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/judul" />
+        android:layout_alignParentTop="true"
+        android:hint="@string/question_hint"
+        android:inputType="text" />
 
     <TextView
-        android:id="@+id/pertanyaan"
+        android:id="@+id/answer_title_single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/isiPertanyaan"
-        android:text="@string/jawaban"
-        android:textSize="@dimen/ukuranJudul" />
+        android:layout_below="@id/question_content_single"
+        android:text="@string/answer_title"
+        android:textSize="@dimen/titleSize" />
 
-
-    <RadioGroup
-        android:id="@+id/pilihJawaban"
+    <EditText
+        android:id="@+id/answer_input_single"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pertanyaan">
+        android:layout_below="@id/answer_title_single"
+        android:hint="@string/add_new_choice"
+        android:inputType="text" />
 
-        <RadioButton
-            android:id="@+id/pilihSatu1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/button_save_single"
+        android:layout_below="@id/answer_input_single">
 
-        <EditText
-            android:id="@+id/jawabanSatu1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/pilihSatu2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/jawabanSatu2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/pilihSatu3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/jawabanSatu3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/pilihSatu4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/jawabanSatu4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </RadioGroup>
 
     <Button
-        android:id="@+id/simpan"
+        android:id="@+id/button_save_single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:onClick="simpan"
-        android:text="@string/tombol_simpan" />
+        android:onClick="save"
+        android:text="@string/button_save" />
 
     <Button
-        android:id="@+id/batal"
+        android:id="@+id/button_cancel_single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/simpan"
-        android:layout_toStartOf="@id/simpan"
-        android:onClick="batal"
-        android:text="@string/tombol_batal" />
+        android:layout_toLeftOf="@id/button_save_single"
+        android:layout_toStartOf="@id/button_save_single"
+        android:onClick="cancel"
+        android:text="@string/button_cancel" />
+
+    <Button
+        android:id="@+id/add_choice_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="@string/add_choice" />
+
 </RelativeLayout>

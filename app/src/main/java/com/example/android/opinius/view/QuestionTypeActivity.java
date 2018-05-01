@@ -1,4 +1,4 @@
-package com.example.android.opinius;
+package com.example.android.opinius.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +9,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.view.View.OnClickListener;
 
-import com.example.android.opinius.questionForm.FormMultipleAnswerActivity;
-import com.example.android.opinius.questionForm.FormShortAnswerActivity;
-import com.example.android.opinius.questionForm.FormSingleAnswerActivity;
+import com.example.android.opinius.R;
+import com.example.android.opinius.view.questionForm.FormMultipleAnswerActivity;
+import com.example.android.opinius.view.questionForm.FormShortAnswerActivity;
+import com.example.android.opinius.view.questionForm.FormSingleAnswerActivity;
 
 public class QuestionTypeActivity extends AppCompatActivity {
 

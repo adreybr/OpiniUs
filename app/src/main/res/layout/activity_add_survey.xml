@@ -6,14 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.example.android.opinius.AddSurveyActivity">
+    tools:context="com.example.android.opinius.view.AddSurveyActivity">
 
     <TextView
-        android:id="@+id/judul"
+        android:id="@+id/question_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/judul"
-        android:textSize="@dimen/ukuranJudul" />
+        android:textSize="@dimen/titleSize" />
 
     <EditText
         android:id="@+id/isiJudul"
@@ -28,5 +28,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:onClick="tambahPertanyaan"
-        android:text="@string/tombol_simpan" />
+        android:text="@string/button_save" />
 </LinearLayout>

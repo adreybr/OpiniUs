@@ -5,39 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context="com.example.android.opinius.questionForm.FormShortAnswerActivity">
+    tools:context=".view.questionForm.FormShortAnswerActivity">
 
     <TextView
-        android:id="@+id/judul"
+        android:id="@+id/question_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pertanyaan :"
-        android:textSize="20dp" />
+        android:text="@string/pertanyaan"
+        android:textSize="@dimen/titleSize" />
 
     <EditText
-        android:id="@+id/isiPertanyaan"
+        android:id="@+id/question_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/judul" />
-
+        android:layout_below="@+id/question_title" />
 
     <Button
-        android:id="@+id/simpan"
+        android:id="@+id/button_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tombol_simpan"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="simpan"/>
+        android:layout_alignParentRight="true"
+        android:onClick="save"
+        android:text="@string/button_save" />
+
     <Button
-        android:id="@+id/batal"
+        android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tombol_batal"
-        android:layout_toLeftOf="@id/simpan"
-        android:layout_toStartOf="@id/simpan"
         android:layout_alignParentBottom="true"
-        android:onClick="batal"/>
+        android:layout_toLeftOf="@id/button_save"
+        android:layout_toStartOf="@id/button_save"
+        android:onClick="cancel"
+        android:text="@string/button_cancel" />
 
 </RelativeLayout>

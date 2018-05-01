@@ -1,4 +1,4 @@
-package com.example.android.opinius;
+package com.example.android.opinius.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.android.opinius.R;
+
 public class AddSurveyActivity extends AppCompatActivity {
     private EditText mJudulEditText;
+    private Intent intent;
 
     public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
@@ -17,12 +20,15 @@ public class AddSurveyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_survey);
 
+        intent = getIntent();
+
         mJudulEditText = (EditText) findViewById(R.id.isiJudul);
     }
 
     public void tambahPertanyaan(View view) {
         Intent intent = new Intent(AddSurveyActivity.this, QuestionList.class);
         intent.putExtra(JUDUL_SURVEY, mJudulEditText.getText().toString());
+        intent.putExtras(intent);
         startActivityForResult(intent, 303);
     }
 

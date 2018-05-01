@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QuestionList">
+    android:orientation="vertical"
+    android:padding="@dimen/margin_default"
+    tools:context=".view.QuestionList">
 
     <TextView
-        android:id="@+id/judul_survey"
+        android:id="@+id/survey_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:textSize="@dimen/ukuranJudul"
+        android:gravity="left"
+        android:textSize="@dimen/titleSize"
         android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/list_pertanyaan"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/question_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </ListView>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

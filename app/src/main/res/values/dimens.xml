@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="ukuranJudul">20sp</dimen>
+    <dimen name="titleSize">20sp</dimen>
     <dimen name="ukuranTipeJawab">20sp</dimen>
     <dimen name="margin_default">10dp</dimen>
     <dimen name="surveylist_padding">6dp</dimen>
