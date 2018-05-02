@@ -1,14 +1,20 @@
 package com.example.android.opinius.view;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,8 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.tambah_survey:
-                Intent intent = new Intent(MainActivity.this, AddSurveyActivity.class);
-                startActivityForResult(intent, 101);
+                add_survey();
                 return true;
             case R.id.lihat_survey:
                 Intent intent1 = new Intent(MainActivity.this, ViewSurveyActivity.class);
@@ -61,6 +66,27 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void add_survey() {
+        LayoutInflater inflater = MainActivity.this.getLayoutInflater();
+        final View dialogLayout = inflater.inflate(R.layout.activity_add_survey, null);
+
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogLayout)
+                .setPositiveButton("SIMPAN", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        EditText mJudul = dialogLayout.findViewById(R.id.isiJudul);
+                        Intent intent = new Intent(MainActivity.this, QuestionList.class);
+                        intent.putExtra("JUDUL", mJudul.getText().toString());
+                        intent.putExtras(intent);
+                        startActivityForResult(intent, 303);
+                    }
+                })
+                .setNegativeButton("CANCEL", null)
+                .create();
+        dialog.show();
     }
 
     @Override

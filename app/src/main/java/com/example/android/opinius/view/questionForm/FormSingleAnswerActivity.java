@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
-import com.example.android.opinius.view.QuestionTypeActivity;
+import com.example.android.opinius.view.QuestionList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form_single_answer);
 
         Intent intent = getIntent();
-        mJudulSurvey = intent.getStringExtra(QuestionTypeActivity.JUDUL_SURVEY);
+        mJudulSurvey = intent.getStringExtra(QuestionList.JUDUL_SURVEY);
         listAnswer = new ArrayList<>();
 
         mQuestionContent = findViewById(R.id.question_content_single);

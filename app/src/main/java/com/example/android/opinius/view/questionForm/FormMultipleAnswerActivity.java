@@ -1,5 +1,6 @@
 package com.example.android.opinius.view.questionForm;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import android.widget.ListView;
 import com.example.android.opinius.R;
 import com.example.android.opinius.adapter.CustomListAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
-import com.example.android.opinius.view.QuestionTypeActivity;
+import com.example.android.opinius.view.QuestionList;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form_multiple_answer);
 
         Intent intent = getIntent();
-        mJudulSurvey = intent.getStringExtra(QuestionTypeActivity.JUDUL_SURVEY);
+        mJudulSurvey = intent.getStringExtra(QuestionList.JUDUL_SURVEY);
 
         mQuestionContent = findViewById(R.id.question_content);
         mAnswerChoiceInput = findViewById(R.id.answer_input);

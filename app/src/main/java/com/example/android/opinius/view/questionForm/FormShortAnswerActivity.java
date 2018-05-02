@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
-import com.example.android.opinius.view.QuestionTypeActivity;
+import com.example.android.opinius.view.QuestionList;
 
 public class FormShortAnswerActivity extends AppCompatActivity {
     private SurveyDBHelper mHelper;
@@ -24,7 +24,7 @@ public class FormShortAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form_short_answer);
 
         Intent intent = getIntent();
-        mJudulSurvey = intent.getStringExtra(QuestionTypeActivity.JUDUL_SURVEY);
+        mJudulSurvey = intent.getStringExtra(QuestionList.JUDUL_SURVEY);
 
         mQuestionContent = findViewById(R.id.question_content);
 

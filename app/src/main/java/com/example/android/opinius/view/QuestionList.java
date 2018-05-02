@@ -1,18 +1,27 @@
 package com.example.android.opinius.view;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +30,9 @@ import com.example.android.opinius.adapter.RVAdapter;
 import com.example.android.opinius.database.model.SurveyContract;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.database.model.question.Question;
+import com.example.android.opinius.view.questionForm.FormMultipleAnswerActivity;
+import com.example.android.opinius.view.questionForm.FormShortAnswerActivity;
+import com.example.android.opinius.view.questionForm.FormSingleAnswerActivity;
 
 import org.chalup.microorm.MicroOrm;
 
@@ -34,6 +46,10 @@ public class QuestionList extends AppCompatActivity {
     private RVAdapter mAdapter;
     private TextView mJudulSurvey;
     private ArrayList<Question> questions = new ArrayList<>();
+    private RadioGroup radioGroup;
+    private RadioButton radioButton;
+    private Button btnDisplay;
+    private String message;
 
     public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
@@ -43,8 +59,8 @@ public class QuestionList extends AppCompatActivity {
         setContentView(R.layout.activity_question_list);
 
         Intent intent = getIntent();
-        String message =
-                intent.getStringExtra(AddSurveyActivity.JUDUL_SURVEY);
+        message =
+                intent.getStringExtra("JUDUL");
         mJudulSurvey = (TextView) findViewById(R.id.survey_title);
         mJudulSurvey.setText(message);
 
@@ -65,9 +81,7 @@ public class QuestionList extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.tambah_pertanyaan:
-                Intent intent = new Intent(QuestionList.this, QuestionTypeActivity.class);
-                intent.putExtra(JUDUL_SURVEY, mJudulSurvey.getText().toString());
-                startActivityForResult(intent, 202);
+                add_question();
                 return true;
             case R.id.save_survey:
                 setResult(RESULT_OK);
@@ -76,6 +90,42 @@ public class QuestionList extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void add_question() {
+        LayoutInflater inflater = QuestionList.this.getLayoutInflater();
+        final View dialogLayout = inflater.inflate(R.layout.activity_question_type, null);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogLayout)
+                .setPositiveButton("SIMPAN", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        radioGroup = dialogLayout.findViewById(R.id.tipeJawab);
+
+                        int selectedId = radioGroup.getCheckedRadioButtonId();
+
+                        // find the radiobutton by returned id
+                        radioButton = (RadioButton) findViewById(selectedId);
+
+                        if (selectedId == R.id.tipeIsian) {
+                            Intent intentIsian = new Intent(QuestionList.this, FormShortAnswerActivity.class);
+                            intentIsian.putExtra(JUDUL_SURVEY, message);
+                            startActivityForResult(intentIsian, 202);
+                        } else if (selectedId == R.id.tipeSatuJawaban) {
+                            Intent intentSatu = new Intent(QuestionList.this, FormSingleAnswerActivity.class);
+                            intentSatu.putExtra(JUDUL_SURVEY, message);
+                            startActivityForResult(intentSatu, 202);
+                        } else if (selectedId == R.id.tipeBanyakJawaban) {
+                            Intent intentBanyak = new Intent(QuestionList.this, FormMultipleAnswerActivity.class);
+                            intentBanyak.putExtra(JUDUL_SURVEY, message);
+                            startActivityForResult(intentBanyak, 202);
+                        }
+                    }
+                })
+                .setNegativeButton("CANCEL", null)
+                .create();
+        dialog.show();
     }
 
     public void updateUI() {
