@@ -35,7 +35,7 @@
         <activity
             android:name=".view.ViewSurveyActivity"
             android:parentActivityName=".view.MainActivity" />
-        <activity android:name=".FillSurvey"></activity>
+        <activity android:name=".view.FillSurvey"></activity>
     </application>
 
 </manifest>

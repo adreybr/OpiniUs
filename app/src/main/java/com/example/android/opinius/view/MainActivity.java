@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,16 +19,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.opinius.FillSurvey;
 import com.example.android.opinius.R;
 import com.example.android.opinius.adapter.SurveyAdapter;
-import com.example.android.opinius.adapter.SurveyListAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.model.question.Question;
 
 import org.chalup.microorm.MicroOrm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
