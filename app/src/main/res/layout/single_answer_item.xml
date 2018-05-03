@@ -19,6 +19,9 @@
                 android:id="@+id/single_answer_question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:text="No."
                 android:textSize="@dimen/question_item_text" />
 
@@ -26,10 +29,11 @@
                 android:id="@+id/single_answer_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_question_item"
                 android:layout_marginLeft="@dimen/margin_question_item"
                 android:layout_marginStart="@dimen/margin_question_item"
+                android:layout_toEndOf="@id/single_answer_question_number"
                 android:layout_toRightOf="@id/single_answer_question_number"
-                android:layout_marginBottom="@dimen/margin_question_item"
                 android:text="Question"
                 android:textSize="@dimen/question_item_text" />
 
