@@ -49,7 +49,7 @@ public class FormShortAnswerActivity extends AppCompatActivity {
             String answerList = "";
             Log.d("ANSWER_LIST", answerList);
             mHelper = new SurveyDBHelper(this);
-            Long id = mHelper.insertQuestion(mJudulSurvey, mQuestionContent.getText().toString(), answerList, Question.TYPE_SINGLE_ANSWER);
+            Long id = mHelper.insertQuestion(mJudulSurvey, mQuestionContent.getText().toString(), answerList, Question.TYPE_SHORT_ANSWER);
             Intent replyIntent = new Intent();
             replyIntent.putExtra("questionID", id);
             setResult(RESULT_OK, replyIntent);

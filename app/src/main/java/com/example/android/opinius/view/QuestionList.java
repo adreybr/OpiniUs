@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.opinius.R;
-import com.example.android.opinius.adapter.RVAdapter;
+import com.example.android.opinius.adapter.QuestionListRecyclerAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.database.model.question.Question;
 import com.example.android.opinius.view.questionForm.FormMultipleAnswerActivity;
@@ -29,15 +29,13 @@ import com.example.android.opinius.view.questionForm.FormSingleAnswerActivity;
 
 import org.chalup.microorm.MicroOrm;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionList extends AppCompatActivity {
     private SurveyDBHelper mHelper;
     private RecyclerView mQuestionListView;
-    private RVAdapter mAdapter;
+    private QuestionListRecyclerAdapter mAdapter;
     private TextView mJudulSurvey;
-    private ArrayList<Question> questions = new ArrayList<>();
     private RadioGroup radioGroup;
     private String message;
     private RadioButton radioButton;
@@ -95,7 +93,6 @@ public class QuestionList extends AppCompatActivity {
                         radioGroup = dialogLayout.findViewById(R.id.tipeJawab);
 
                         int selectedId = radioGroup.getCheckedRadioButtonId();
-
                         // find the radiobutton by returned id
                         radioButton = (RadioButton) findViewById(selectedId);
 
@@ -142,23 +139,20 @@ public class QuestionList extends AppCompatActivity {
             List<Question> questions;
             questions = uOrm.listFromCursor(cursor, Question.class);
 
-            for (int i = 0; i < questions.size(); i++) {
-                Log.d("QUESTION", i + " " + questions.get(i).getQuestion());
-            }
             if (mAdapter == null) {
-                mAdapter = new RVAdapter(this, questions);
+                Log.d("mAdapter", "updateUI: mAdapter = null");
+                mAdapter = new QuestionListRecyclerAdapter(this, questions);
                 mQuestionListView.setAdapter(mAdapter);
                 mQuestionListView.setLayoutManager(new LinearLayoutManager(this));
             } else {
-                //            mAdapter.clear();
-                //            mAdapter.addAll(questionList);
+                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
+                mAdapter.swap(questions);
                 mAdapter.notifyDataSetChanged();
             }
-        }
 
+        }
         cursor.close();
         mDB.close();
-
     }
 
     @Override

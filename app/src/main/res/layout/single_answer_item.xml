@@ -47,10 +47,6 @@
                 android:layout_toEndOf="@id/single_answer_question_number"
                 android:layout_toRightOf="@id/single_answer_question_number">
 
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
             </RadioGroup>
 
         </RelativeLayout>

@@ -84,7 +84,6 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
         mAnswerChoiceInput = findViewById(R.id.answer_input_multiple);
         String addChoice = mAnswerChoiceInput.getText().toString();
         if (!addChoice.equals("")) {
-            Log.d("EDIT_TEXT", addChoice);
             listAnswer.add(addChoice);
             CheckBoxAdapter dataAdapter = new CheckBoxAdapter(this,
                     R.layout.checkbox_item, listAnswer);
@@ -92,7 +91,6 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
             mAnswerListView.setAdapter(dataAdapter);
             mAnswerChoiceInput.setText("");
         } else {
-//            Toast.makeText(this, "Answer can't null", Toast.LENGTH_SHORT).show();
             mAnswerChoiceInput.setError("Answer can't be null");
         }
 

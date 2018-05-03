@@ -28,7 +28,6 @@ public class CheckBoxAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-//        View v = convertView;
         OptionHolder holder;
 
         if (convertView == null) {
