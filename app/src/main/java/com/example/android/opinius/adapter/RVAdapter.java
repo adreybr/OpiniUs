@@ -1,6 +1,5 @@
 package com.example.android.opinius.adapter;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.model.question.Question;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.QuestionViewHolder> {
@@ -30,7 +28,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.QuestionViewHolder
     @NonNull
     @Override
     public RVAdapter.QuestionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.question_item,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.short_anwer_item,
                 parent, false);
         QuestionViewHolder rvh = new QuestionViewHolder(v);
         return rvh;
@@ -59,7 +57,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.QuestionViewHolder
         public QuestionViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardview);
-            question = itemView.findViewById(R.id.questions);
+            question = itemView.findViewById(R.id.single_answer_question);
             answer = itemView.findViewById(R.id.question_answer);
 
         }
