@@ -52,13 +52,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.QuestionViewHolder
     public class QuestionViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         public final TextView question;
-        public final EditText answer;
 
         public QuestionViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardview);
             question = itemView.findViewById(R.id.single_answer_question);
-            answer = itemView.findViewById(R.id.question_answer);
 
         }
     }
