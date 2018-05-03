@@ -139,16 +139,18 @@ public class QuestionList extends AppCompatActivity {
             List<Question> questions;
             questions = uOrm.listFromCursor(cursor, Question.class);
 
-            if (mAdapter == null) {
-                Log.d("mAdapter", "updateUI: mAdapter = null");
-                mAdapter = new QuestionListRecyclerAdapter(this, questions);
-                mQuestionListView.setAdapter(mAdapter);
-                mQuestionListView.setLayoutManager(new LinearLayoutManager(this));
-            } else {
-                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
-                mAdapter.swap(questions);
-                mAdapter.notifyDataSetChanged();
-            }
+            Log.d("mAdapter", "updateUI: mAdapter = null");
+            mAdapter = new QuestionListRecyclerAdapter(this, questions);
+            mQuestionListView.setAdapter(mAdapter);
+            mQuestionListView.setLayoutManager(new LinearLayoutManager(this));
+
+//            if (mAdapter == null) {
+//
+//            } else {
+//                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
+//                mAdapter.swap(questions);
+//                mAdapter.notifyDataSetChanged();
+//            }
 
         }
         cursor.close();
