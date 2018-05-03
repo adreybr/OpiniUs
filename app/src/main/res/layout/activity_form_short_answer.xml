@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/question_title_short"
         android:hint="@string/question_hint"
-        android:inputType="text" />
+        android:inputType="textCapSentences" />
 
     <Button
         android:id="@+id/button_save_short"

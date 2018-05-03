@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.android.opinius.database.model.question.Question;
+import com.example.android.opinius.model.question.Question;
 
 public class SurveyDBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;

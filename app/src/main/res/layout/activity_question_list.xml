@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:gravity="left"
+        android:layout_marginBottom="@dimen/margin_question_item"
+        android:gravity="center_horizontal"
+        android:text="Judul Survey"
         android:textSize="@dimen/titleSize"
         android:textStyle="bold" />
 

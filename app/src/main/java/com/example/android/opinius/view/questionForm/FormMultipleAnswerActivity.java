@@ -11,16 +11,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
 import com.example.android.opinius.R;
-import com.example.android.opinius.adapter.CheckBoxAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
-import com.example.android.opinius.database.model.question.Question;
-import com.example.android.opinius.view.QuestionList;
+import com.example.android.opinius.model.question.Question;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FormMultipleAnswerActivity extends AppCompatActivity {

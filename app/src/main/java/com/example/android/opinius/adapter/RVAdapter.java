@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.opinius.R;
-import com.example.android.opinius.database.model.question.Question;
+import com.example.android.opinius.model.question.Question;
 
 import java.util.List;
 

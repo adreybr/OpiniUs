@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:hint="@string/question_hint"
-        android:inputType="text" />
+        android:inputType="textCapSentences" />
 
     <TextView
         android:id="@+id/answer_title_multiple"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/answer_title_multiple"
         android:hint="@string/add_new_choice"
-        android:inputType="text" />
+        android:inputType="textCapSentences" />
 
     <LinearLayout
         android:id="@+id/checkbox_group"

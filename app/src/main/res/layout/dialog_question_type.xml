@@ -44,6 +44,7 @@
         android:layout_width="137dp"
         android:layout_height="121dp"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:src="@drawable/question" />
 

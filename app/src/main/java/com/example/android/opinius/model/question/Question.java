@@ -1,6 +1,4 @@
-package com.example.android.opinius.database.model.question;
-
-import android.support.annotation.ColorLong;
+package com.example.android.opinius.model.question;
 
 import org.chalup.microorm.annotations.Column;
 

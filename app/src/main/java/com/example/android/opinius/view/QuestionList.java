@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.example.android.opinius.R;
 import com.example.android.opinius.adapter.QuestionListRecyclerAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
-import com.example.android.opinius.database.model.question.Question;
+import com.example.android.opinius.model.question.Question;
 import com.example.android.opinius.view.questionForm.FormMultipleAnswerActivity;
 import com.example.android.opinius.view.questionForm.FormShortAnswerActivity;
 import com.example.android.opinius.view.questionForm.FormSingleAnswerActivity;

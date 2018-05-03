@@ -19,9 +19,7 @@ import android.widget.Toast;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
-import com.example.android.opinius.database.model.question.Question;
-
-import org.w3c.dom.Text;
+import com.example.android.opinius.model.question.Question;
 
 import java.util.ArrayList;
 

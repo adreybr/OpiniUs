@@ -8,16 +8,21 @@
     tools:context="com.example.android.opinius.view.MainActivity">
 
     <ImageView
-    android:id="@+id/imageView"
-    android:layout_width="70dp"
-    android:layout_height="65dp"
-    android:src="@drawable/surveey" />
+        android:id="@+id/imageView"
+        android:layout_width="70dp"
+        android:layout_height="65dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/surveey" />
 
     <TextView
         android:id="@+id/question_title"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="150dp"
+        android:layout_toEndOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView"
+        android:gravity="center_horizontal"
         android:text="@string/judul"
         android:textSize="@dimen/titleSize" />
 
@@ -25,10 +30,12 @@
         android:id="@+id/isiJudul"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/question_title"
+        android:layout_toEndOf="@id/imageView"
+        android:layout_toRightOf="@id/imageView"
+        android:gravity="center"
         android:hint="@string/masukkan_judul_survey"
-        android:inputType="text" />
+        android:inputType="textCapWords" />
 
 </RelativeLayout>
 

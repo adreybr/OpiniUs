@@ -9,8 +9,7 @@ import android.widget.EditText;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
-import com.example.android.opinius.database.model.question.Question;
-import com.example.android.opinius.view.QuestionList;
+import com.example.android.opinius.model.question.Question;
 
 public class FormShortAnswerActivity extends AppCompatActivity {
     private SurveyDBHelper mHelper;
