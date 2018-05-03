@@ -8,7 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -58,7 +59,7 @@ public class QuestionListRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
         CardView cardView;
         public final TextView questionNumber;
         public final TextView question;
-        public final ListView listView;
+        public final LinearLayout listView;
 
         public MultipleAnswerViewHolder(View itemView) {
             super(itemView);
@@ -86,13 +87,13 @@ public class QuestionListRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
 
         if (viewType == Question.TYPE_SHORT_ANSWER) {
-            View view = layoutInflater.inflate(R.layout.short_anwer_item, parent, false);
+            View view = layoutInflater.inflate(R.layout.adapter_short_anwer_item, parent, false);
             return new ShortAnswerViewHolder(view);
         } else if (viewType == Question.TYPE_SINGLE_ANSWER) {
-            View view = layoutInflater.inflate(R.layout.single_answer_item, parent, false);
+            View view = layoutInflater.inflate(R.layout.adapter_single_answer_item, parent, false);
             return new SingleAnswerViewHolder(view);
         } else if (viewType == Question.TYPE_MULTIPLE_ANSWER) {
-            View view = layoutInflater.inflate(R.layout.multiple_answer_item, parent, false);
+            View view = layoutInflater.inflate(R.layout.adapter_multiple_answer_item, parent, false);
             return new MultipleAnswerViewHolder(view);
         }
         return null;
@@ -131,19 +132,16 @@ public class QuestionListRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
             multipleAnswerViewHolder.question.setText(question.getQuestion());
 
             String[] answerSplit = question.getAnswerList().split("#");
-
-
             List<String> answerList = Arrays.asList(answerSplit);
 
-            for (String dodo : answerList
-                    ) {
-                Log.d("DODO", "onBindViewHolder: " + dodo);
+//            LayoutInflater inflater = LayoutInflater.from(context);
+            for (int i = 0; i < answerList.size(); i++) {
+                View view = mInflater.inflate(R.layout.checkbox_item, multipleAnswerViewHolder.listView, false);
+                CheckBox option = view.findViewById(R.id.checkbox_option);
+                option.setText(answerList.get(i));
+                multipleAnswerViewHolder.listView.addView(view);
 
             }
-
-            CheckBoxAdapter dataAdapter = new CheckBoxAdapter(context,
-                    R.layout.checkbox_item, answerList);
-            multipleAnswerViewHolder.listView.setAdapter(dataAdapter);
         }
 
     }

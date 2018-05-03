@@ -12,7 +12,6 @@ import android.widget.RadioGroup;
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.database.model.question.Question;
-import com.example.android.opinius.view.QuestionList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +21,9 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
     private String mJudulSurvey;
     private EditText mQuestionContent;
     private EditText mAnswerChoiceInput;
-    private RadioGroup mAnswerList;
+    private RadioGroup mRadioGroup;
     private List<String> listAnswer;
     private int choiceCount = 0;
-    public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +36,7 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
 
         mQuestionContent = findViewById(R.id.question_content_single);
         mAnswerChoiceInput = findViewById(R.id.answer_input_single);
-        mAnswerList = findViewById(R.id.radio_group);
+        mRadioGroup = findViewById(R.id.radio_group);
 
         findViewById(R.id.add_choice_single).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +89,7 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
             radioButton.setText(mAnswerChoiceInput.getText().toString());
             radioButton.setId(choiceCount + 1);
             choiceCount++;
-            mAnswerList.addView(radioButton);
+            mRadioGroup.addView(radioButton);
             mAnswerChoiceInput.setText("");
         } else {
 //            Toast.makeText(this, "Answer can't null", Toast.LENGTH_SHORT).show();

@@ -16,7 +16,7 @@ public class FormShortAnswerActivity extends AppCompatActivity {
     private SurveyDBHelper mHelper;
     private String mJudulSurvey;
     private EditText mQuestionContent;
-    public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,11 @@ public class FormShortAnswerActivity extends AppCompatActivity {
         mJudulSurvey = intent.getStringExtra("JUDUL");
         mQuestionContent = findViewById(R.id.question_content_short);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     public void cancel(View view) {

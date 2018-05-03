@@ -83,7 +83,7 @@ public class QuestionList extends AppCompatActivity {
 
     public void add_question() {
         LayoutInflater inflater = QuestionList.this.getLayoutInflater();
-        final View dialogLayout = inflater.inflate(R.layout.activity_question_type, null);
+        final View dialogLayout = inflater.inflate(R.layout.dialog_question_type, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
                 .setPositiveButton("SIMPAN", new DialogInterface.OnClickListener() {

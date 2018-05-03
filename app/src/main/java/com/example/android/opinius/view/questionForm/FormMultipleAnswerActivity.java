@@ -2,8 +2,10 @@ package com.example.android.opinius.view.questionForm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -45,6 +47,21 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
                 addCheckboxButton();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                Intent replyIntent = new Intent();
+                replyIntent.putExtra("JUDUL", mJudulSurvey);
+                setResult(RESULT_OK, replyIntent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 
     public void cancel(View view) {

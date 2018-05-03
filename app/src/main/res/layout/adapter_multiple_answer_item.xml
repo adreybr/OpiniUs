@@ -37,7 +37,7 @@
                 android:text="Question"
                 android:textSize="@dimen/question_item_text" />
 
-            <ListView
+            <LinearLayout
                 android:id="@+id/listview_multiple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +45,8 @@
                 android:layout_marginLeft="@dimen/margin_question_item"
                 android:layout_marginStart="@dimen/margin_question_item"
                 android:layout_toEndOf="@id/multi_answer_question_number"
-                android:layout_toRightOf="@id/multi_answer_question_number" />
+                android:layout_toRightOf="@id/multi_answer_question_number"
+                android:orientation="vertical" />
 
         </RelativeLayout>
 

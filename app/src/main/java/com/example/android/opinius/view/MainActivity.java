@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mHelper = new SurveyDBHelper(this);
-//        mDB = mHelper.getWritableDatabase();
-//        mDB.execSQL("DROP TABLE IF EXISTS " + Question.TABLE);
         mSurveyList = (ListView) findViewById(R.id.list_survey);
 //        updateUI();
 
@@ -67,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void add_survey() {
         LayoutInflater inflater = MainActivity.this.getLayoutInflater();
-        final View dialogLayout = inflater.inflate(R.layout.activity_add_survey, null);
+        final View dialogLayout = inflater.inflate(R.layout.dialog_add_survey, null);
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivityForResult(intent, 303);
                     }
                 })
-                .setNegativeButton("CANCEL", null)
+                .setNegativeButton("BATAL", null)
                 .create();
         dialog.show();
     }
@@ -94,6 +92,20 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Survey berhasil disimpan", Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        MainActivity.super.onBackPressed();
+                    }
+                }).create().show();
     }
 
 
