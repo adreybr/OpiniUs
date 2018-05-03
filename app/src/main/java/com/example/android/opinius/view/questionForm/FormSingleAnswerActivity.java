@@ -83,14 +83,16 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
         mAnswerChoiceInput = findViewById(R.id.answer_input_single);
         String addChoice = mAnswerChoiceInput.getText().toString();
         if (!addChoice.equals("")) {
-            Log.d("EDIT_TEXT", addChoice);
             listAnswer.add(addChoice);
+            mRadioGroup = findViewById(R.id.radio_group);
+
             RadioButton radioButton = new RadioButton(this);
-            radioButton.setText(mAnswerChoiceInput.getText().toString());
+            radioButton.setText(addChoice);
             radioButton.setId(choiceCount + 1);
             choiceCount++;
             mRadioGroup.addView(radioButton);
             mAnswerChoiceInput.setText("");
+
         } else {
 //            Toast.makeText(this, "Answer can't null", Toast.LENGTH_SHORT).show();
             mAnswerChoiceInput.setError("Answer can't be null");

@@ -6,4 +6,6 @@
     <dimen name="surveylist_padding">6dp</dimen>
     <dimen name="question_item_text">22sp</dimen>
     <dimen name="margin_question_item">8sp</dimen>
+    <dimen name="margin_top_no_questions">120dp</dimen>
+    <dimen name="msg_no_questions">26sp</dimen>
 </resources>

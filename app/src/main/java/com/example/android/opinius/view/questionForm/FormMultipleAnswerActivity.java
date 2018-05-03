@@ -5,9 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.android.opinius.R;
@@ -17,6 +20,7 @@ import com.example.android.opinius.database.model.question.Question;
 import com.example.android.opinius.view.QuestionList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FormMultipleAnswerActivity extends AppCompatActivity {
@@ -25,7 +29,7 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
     private EditText mQuestionContent;
     private EditText mAnswerChoiceInput;
     private List<String> listAnswer;
-    private ListView mAnswerListView;
+    private LinearLayout mAnswerListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,11 +106,16 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
         String addChoice = mAnswerChoiceInput.getText().toString();
         if (!addChoice.equals("")) {
             listAnswer.add(addChoice);
-            CheckBoxAdapter dataAdapter = new CheckBoxAdapter(this,
-                    R.layout.checkbox_item, listAnswer);
             mAnswerListView = findViewById(R.id.checkbox_group);
-            mAnswerListView.setAdapter(dataAdapter);
             mAnswerChoiceInput.setText("");
+
+            LayoutInflater mInflater = LayoutInflater.from(this);
+
+            View view = mInflater.inflate(R.layout.checkbox_item, mAnswerListView, false);
+            CheckBox option = view.findViewById(R.id.checkbox_option);
+            option.setText(addChoice);
+            mAnswerListView.addView(view);
+
         } else {
             mAnswerChoiceInput.setError("Answer can't be null");
         }

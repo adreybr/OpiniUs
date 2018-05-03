@@ -19,4 +19,5 @@
     <string name="question_hint">Pertanyaan...</string>
     <string name="add_choice">Add Choice</string>
     <string name="add_new_choice">Add new choice</string>
+    <string name="msg_no_questions">No Active Survey found!</string>
 </resources>

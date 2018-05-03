@@ -27,16 +27,17 @@
         android:id="@+id/answer_input_multiple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/add_new_choice"
         android:layout_below="@id/answer_title_multiple"
+        android:hint="@string/add_new_choice"
         android:inputType="text" />
 
-    <ListView
+    <LinearLayout
         android:id="@+id/checkbox_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/button_save_multiple"
-        android:layout_below="@id/answer_input_multiple" />
+        android:layout_below="@id/answer_input_multiple"
+        android:orientation="vertical" />
 
     <Button
         android:id="@+id/button_save_multiple"

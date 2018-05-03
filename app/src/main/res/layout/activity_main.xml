@@ -15,4 +15,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <TextView
+        android:id="@+id/empty_questions_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_top_no_questions"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/msg_no_questions"
+        android:textColor="@color/msg_no_questions"
+        android:textSize="@dimen/msg_no_questions" />
+
 </RelativeLayout>

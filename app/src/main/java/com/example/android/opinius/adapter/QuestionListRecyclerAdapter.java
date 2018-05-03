@@ -134,13 +134,11 @@ public class QuestionListRecyclerAdapter extends RecyclerView.Adapter<RecyclerVi
             String[] answerSplit = question.getAnswerList().split("#");
             List<String> answerList = Arrays.asList(answerSplit);
 
-//            LayoutInflater inflater = LayoutInflater.from(context);
             for (int i = 0; i < answerList.size(); i++) {
                 View view = mInflater.inflate(R.layout.checkbox_item, multipleAnswerViewHolder.listView, false);
                 CheckBox option = view.findViewById(R.id.checkbox_option);
                 option.setText(answerList.get(i));
                 multipleAnswerViewHolder.listView.addView(view);
-
             }
         }
 

@@ -14,11 +14,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.database.model.question.Question;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private SurveyDBHelper mHelper;
     private ListView mSurveyList;
     private ArrayAdapter<String> mAdapter;
+    private TextView noQuestionsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         mHelper = new SurveyDBHelper(this);
         mSurveyList = (ListView) findViewById(R.id.list_survey);
+        noQuestionsView = (TextView) findViewById(R.id.empty_questions_view);
 //        updateUI();
 
     }
@@ -141,4 +146,15 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
         mDB.close();
     }
+
+    private void toggleEmptySurvey() {
+        // you can check notesList.size() > 0
+
+        if (mHelper.getQuestionCount() > 0) {
+            noQuestionsView.setVisibility(View.GONE);
+        } else {
+            noQuestionsView.setVisibility(View.VISIBLE);
+        }
+    }
+
 }

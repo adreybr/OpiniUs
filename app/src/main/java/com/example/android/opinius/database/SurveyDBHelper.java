@@ -2,15 +2,14 @@ package com.example.android.opinius.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.android.opinius.database.model.question.Question;
 
 public class SurveyDBHelper extends SQLiteOpenHelper {
-    // Database Version
     private static final int DATABASE_VERSION = 1;
-    // Database Name
     private static final String DATABASE_NAME = "survey_db";
 
     public SurveyDBHelper(Context context) {
@@ -21,7 +20,6 @@ public class SurveyDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Creating Tables
         db.execSQL(Question.CREATE_TABLE);
     }
 
@@ -45,6 +43,17 @@ public class SurveyDBHelper extends SQLiteOpenHelper {
         long id = db.insert(Question.TABLE, null, values);
         db.close();
         return id;
+    }
+
+    public int getQuestionCount() {
+        String countQuery = "SELECT  * FROM " + Question.TABLE;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        int count = cursor.getCount();
+        cursor.close();
+        // return count
+        return count;
     }
 
 }
