@@ -14,9 +14,7 @@ public class SurveyDBHelper extends SQLiteOpenHelper {
 
     public SurveyDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//        context.deleteDatabase(DATABASE_NAME);
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -55,5 +53,21 @@ public class SurveyDBHelper extends SQLiteOpenHelper {
         // return count
         return count;
     }
+
+    public void deleteDatabase(Context context) {
+        context.deleteDatabase(DATABASE_NAME);
+    }
+
+    public int updateQuestion(Question question) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Question.COLUMN_ANSWER, question.getAnswer());
+
+        // updating row
+        return db.update(Question.TABLE, values, Question.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(question.getId())});
+    }
+
 
 }

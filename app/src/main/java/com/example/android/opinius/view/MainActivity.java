@@ -7,21 +7,30 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.opinius.FillSurvey;
 import com.example.android.opinius.R;
+import com.example.android.opinius.adapter.SurveyAdapter;
+import com.example.android.opinius.adapter.SurveyListAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.model.question.Question;
 
+import org.chalup.microorm.MicroOrm;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     SQLiteDatabase mDB;
@@ -30,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     private SurveyDBHelper mHelper;
     private ListView mSurveyList;
-    private ArrayAdapter<String> mAdapter;
+    private ArrayAdapter<Question> mAdapter;
     private TextView noQuestionsView;
+    private List<Question> questions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +51,18 @@ public class MainActivity extends AppCompatActivity {
         mHelper = new SurveyDBHelper(this);
         mSurveyList = (ListView) findViewById(R.id.list_survey);
         noQuestionsView = (TextView) findViewById(R.id.empty_questions_view);
-//        updateUI();
+        toggleEmptySurvey();
+        updateUI();
+
+        mSurveyList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent in = new Intent(MainActivity.this, FillSurvey.class);
+                Log.d("COBAEINS", "onItemClick: " + questions.get(position).getSurveyTitle());
+                in.putExtra("surveyTarget", questions.get(position).getSurveyTitle());
+                startActivityForResult(in, 109);
+            }
+        });
 
     }
 
@@ -79,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, QuestionList.class);
                         intent.putExtra("JUDUL", mJudul.getText().toString());
                         intent.putExtras(intent);
-                        startActivityForResult(intent, 303);
+                        startActivityForResult(intent, 101);
                     }
                 })
                 .setNegativeButton("BATAL", null)
@@ -93,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "Survey berhasil disimpan", Toast.LENGTH_LONG).show();
+                updateUI();
             }
         }
     }
@@ -113,41 +135,56 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateUI() {
-        ArrayList<String> taskList = new ArrayList<>();
         mDB = mHelper.getReadableDatabase();
-        Cursor cursor = mDB.query(Question.TABLE,
-                new String[]{Question.COLUMN_ID,
+        Cursor cursor = mDB.query(true, Question.TABLE, new String[]{Question.COLUMN_ID,
                         Question.COLUMN_SURVEY_TITLE,
                         Question.COLUMN_QUESTION,
                         Question.COLUMN_ANSWER_LIST,
                         Question.COLUMN_QUESTION_TYPE,
                         Question.COLUMN_ANSWER},
-                null, null, null, null, null);
-        while (cursor.moveToNext()) {
-            int idx =
-                    cursor.getColumnIndex(Question.COLUMN_SURVEY_TITLE);
-            taskList.add(cursor.getString(idx));
+                null, null, Question.COLUMN_SURVEY_TITLE, null, Question.COLUMN_ID, null);
+        if (cursor.getCount() != 0) {
+            MicroOrm uOrm = new MicroOrm();
 
-        }
+            questions = uOrm.listFromCursor(cursor, Question.class);
+            if (mAdapter == null) {
+                mAdapter = new SurveyAdapter(this, R.layout.survey_item, questions);
+                mSurveyList.setAdapter(mAdapter);
 
-        if (mAdapter == null) {
-            mAdapter = new ArrayAdapter<>(this,
-                    R.layout.survey_item,
-                    R.id.survey_title,
-                    taskList);
-            mSurveyList.setAdapter(mAdapter);
-        } else {
-            mAdapter.clear();
-            mAdapter.addAll(taskList);
-            mAdapter.notifyDataSetChanged();
+            } else {
+                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
+                mAdapter.clear();
+                mAdapter.addAll(questions);
+                mAdapter.notifyDataSetChanged();
+            }
+
         }
         cursor.close();
         mDB.close();
+//        while (cursor.moveToNext()) {
+//            int idx =
+//                    cursor.getColumnIndex(Question.COLUMN_SURVEY_TITLE);
+//            taskList.add(cursor.getString(idx));
+//
+//        }
+//
+//        if (mAdapter == null) {
+//            mAdapter = new ArrayAdapter<>(this,
+//                    R.layout.survey_item,
+//                    R.id.survey_title,
+//                    taskList);
+//            mSurveyList.setAdapter(mAdapter);
+//        } else {
+//            mAdapter.clear();
+//            mAdapter.addAll(taskList);
+//            mAdapter.notifyDataSetChanged();
+//        }
+//        cursor.close();
+//        mDB.close();
     }
 
     private void toggleEmptySurvey() {
         // you can check notesList.size() > 0
-
         if (mHelper.getQuestionCount() > 0) {
             noQuestionsView.setVisibility(View.GONE);
         } else {

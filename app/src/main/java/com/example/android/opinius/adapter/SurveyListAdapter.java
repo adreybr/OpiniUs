@@ -1,4 +1,4 @@
-package com.example.android.opinius.view;
+package com.example.android.opinius.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -43,7 +43,7 @@ public class SurveyListAdapter extends
 
         SurveyViewHolder(View itemView, SurveyListAdapter mAdapter) {
             super(itemView);
-            this.surveyItemView = (TextView) itemView.findViewById(R.id.survey);
+            this.surveyItemView = (TextView) itemView.findViewById(R.id.survey_title);
             this.mAdapter = mAdapter;
         }
     }

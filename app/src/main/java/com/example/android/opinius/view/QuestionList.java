@@ -73,6 +73,7 @@ public class QuestionList extends AppCompatActivity {
                 add_question();
                 return true;
             case R.id.save_survey:
+
                 setResult(RESULT_OK);
                 finish();
                 return true;
@@ -139,13 +140,12 @@ public class QuestionList extends AppCompatActivity {
             List<Question> questions;
             questions = uOrm.listFromCursor(cursor, Question.class);
 
-            Log.d("mAdapter", "updateUI: mAdapter = null");
+//            if (mAdapter == null) {
+//            Log.d("mAdapter", "updateUI: mAdapter = null");
             mAdapter = new QuestionListRecyclerAdapter(this, questions);
             mQuestionListView.setAdapter(mAdapter);
             mQuestionListView.setLayoutManager(new LinearLayoutManager(this));
 
-//            if (mAdapter == null) {
-//
 //            } else {
 //                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
 //                mAdapter.swap(questions);
@@ -163,6 +163,8 @@ public class QuestionList extends AppCompatActivity {
         if (requestCode == 202) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "Pertanyaan berhasil disimpan", Toast.LENGTH_SHORT).show();
+                Intent replyIntent = new Intent();
+                setResult(RESULT_OK, replyIntent);
                 updateUI();
             }
         }

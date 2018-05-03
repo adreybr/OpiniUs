@@ -20,8 +20,6 @@
             android:name=".view.QuestionList"
             android:label="List Pertanyaan"
             android:parentActivityName=".view.MainActivity" />
-
-
         <activity
             android:name=".view.questionForm.FormShortAnswerActivity"
             android:label="Isian Singkat"
@@ -34,11 +32,10 @@
             android:name=".view.questionForm.FormMultipleAnswerActivity"
             android:label="Pilih Banyak"
             android:parentActivityName=".view.QuestionList" />
-
         <activity
             android:name=".view.ViewSurveyActivity"
             android:parentActivityName=".view.MainActivity" />
-
+        <activity android:name=".FillSurvey"></activity>
     </application>
 
 </manifest>
