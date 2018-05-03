@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.model.question.Question;
@@ -50,7 +49,6 @@ public class CustomListAdapter extends ArrayAdapter<Question> {
 
         Question question = questionList.get(position);
         holder.optionView.setText(question.getQuestion());
-
         return v;
     }
 

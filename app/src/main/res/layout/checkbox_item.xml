@@ -3,18 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/checkbox_image"
-        android:layout_width="47dp"
-        android:layout_height="47dp"
-        android:src="@android:drawable/checkbox_off_background" />
-
-    <EditText
-        android:id="@+id/checkbox_value"
-        android:layout_width="match_parent"
+    <CheckBox
+        android:id="@+id/checkbox_option"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/checkbox_image"
-        android:layout_toRightOf="@id/checkbox_image"
-        android:inputType="text" />
+        android:src="@android:drawable/checkbox_off_background"
+        android:text="Options" />
+
 
 </RelativeLayout>

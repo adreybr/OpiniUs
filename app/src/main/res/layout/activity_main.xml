@@ -10,11 +10,6 @@
     android:layout_marginTop="@dimen/margin_default"
     tools:context="com.example.android.opinius.view.MainActivity">
 
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/recyclerview"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
-
     <ListView
         android:id="@+id/list_survey"
         android:layout_width="match_parent"

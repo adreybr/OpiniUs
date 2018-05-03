@@ -18,6 +18,11 @@ public class Question {
     public static final String COLUMN_QUESTION_TYPE = "question_type";
     public static final String COLUMN_ANSWER = "answer";
 
+    public static final int TYPE_SHORT_ANSWER = 1;
+    public static final int TYPE_SINGLE_ANSWER = 2;
+    public static final int TYPE_MULTIPLE_ANSWER = 3;
+
+
     @Column(COLUMN_ID)
     private int id;
     @Column(COLUMN_SURVEY_TITLE)

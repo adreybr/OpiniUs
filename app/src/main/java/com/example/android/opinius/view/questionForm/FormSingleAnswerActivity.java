@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
+import com.example.android.opinius.database.model.question.Question;
 import com.example.android.opinius.view.QuestionList;
 
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_form_single_answer);
 
         Intent intent = getIntent();
-        mJudulSurvey = intent.getStringExtra(QuestionList.JUDUL_SURVEY);
+        mJudulSurvey = intent.getStringExtra("JUDUL");
         listAnswer = new ArrayList<>();
 
         mQuestionContent = findViewById(R.id.question_content_single);
@@ -73,7 +73,7 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
             }
             Log.d("ANSWER_LIST", answerList);
             mHelper = new SurveyDBHelper(this);
-            Long id = mHelper.insertQuestion(mJudulSurvey, mQuestionContent.getText().toString(), answerList, 2);
+            Long id = mHelper.insertQuestion(mJudulSurvey, mQuestionContent.getText().toString(), answerList, Question.TYPE_SINGLE_ANSWER);
             Intent replyIntent = new Intent();
             replyIntent.putExtra("questionID", id);
             setResult(RESULT_OK, replyIntent);
@@ -94,7 +94,9 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
             mAnswerList.addView(radioButton);
             mAnswerChoiceInput.setText("");
         } else {
-            Toast.makeText(this, "Answer can't null", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Answer can't null", Toast.LENGTH_SHORT).show();
+            mAnswerChoiceInput.setError("Answer can't be null");
         }
+
     }
 }

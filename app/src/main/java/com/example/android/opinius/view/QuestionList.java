@@ -1,14 +1,12 @@
 package com.example.android.opinius.view;
 
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,10 +14,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,7 +21,6 @@ import android.widget.Toast;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.adapter.RVAdapter;
-import com.example.android.opinius.database.model.SurveyContract;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.database.model.question.Question;
 import com.example.android.opinius.view.questionForm.FormMultipleAnswerActivity;
@@ -36,7 +29,6 @@ import com.example.android.opinius.view.questionForm.FormSingleAnswerActivity;
 
 import org.chalup.microorm.MicroOrm;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,9 +39,8 @@ public class QuestionList extends AppCompatActivity {
     private TextView mJudulSurvey;
     private ArrayList<Question> questions = new ArrayList<>();
     private RadioGroup radioGroup;
-    private RadioButton radioButton;
-    private Button btnDisplay;
     private String message;
+    private RadioButton radioButton;
 
     public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
@@ -110,15 +101,15 @@ public class QuestionList extends AppCompatActivity {
 
                         if (selectedId == R.id.tipeIsian) {
                             Intent intentIsian = new Intent(QuestionList.this, FormShortAnswerActivity.class);
-                            intentIsian.putExtra(JUDUL_SURVEY, message);
+                            intentIsian.putExtra("JUDUL", message);
                             startActivityForResult(intentIsian, 202);
                         } else if (selectedId == R.id.tipeSatuJawaban) {
                             Intent intentSatu = new Intent(QuestionList.this, FormSingleAnswerActivity.class);
-                            intentSatu.putExtra(JUDUL_SURVEY, message);
+                            intentSatu.putExtra("JUDUL", message);
                             startActivityForResult(intentSatu, 202);
                         } else if (selectedId == R.id.tipeBanyakJawaban) {
                             Intent intentBanyak = new Intent(QuestionList.this, FormMultipleAnswerActivity.class);
-                            intentBanyak.putExtra(JUDUL_SURVEY, message);
+                            intentBanyak.putExtra("JUDUL", message);
                             startActivityForResult(intentBanyak, 202);
                         }
                     }
@@ -129,7 +120,6 @@ public class QuestionList extends AppCompatActivity {
     }
 
     public void updateUI() {
-//        ArrayList<Question> questionList = new ArrayList<>();
         SQLiteDatabase mDB = mHelper.getReadableDatabase();
         String whereClause = Question.COLUMN_SURVEY_TITLE + " = ?";
         String[] whereArgs = new String[]{mJudulSurvey.getText().toString()};
@@ -148,16 +138,7 @@ public class QuestionList extends AppCompatActivity {
 //        }
         if (cursor.getCount() != 0) {
             MicroOrm uOrm = new MicroOrm();
-//            Question o = uOrm.fromCursor(cursor, Question.class);
-//            ContentValues values = uOrm.toContentValues(o);
 
-            // in case you'll iterate over the whole cursor
-//        Question o = new Question();
-//        do {
-//            uOrm.fromCursor(cursor, o);
-//        } while (cursor.moveToNext());
-
-// if you need to dump the whole cursor to list
             List<Question> questions;
             questions = uOrm.listFromCursor(cursor, Question.class);
 
@@ -165,27 +146,15 @@ public class QuestionList extends AppCompatActivity {
                 Log.d("QUESTION", i + " " + questions.get(i).getQuestion());
             }
             if (mAdapter == null) {
-                // Create an adapter and supply the data to be displayed.
                 mAdapter = new RVAdapter(this, questions);
-                // Connect the adapter with the RecyclerView.
                 mQuestionListView.setAdapter(mAdapter);
-                // Give the RecyclerView a default layout manager.
                 mQuestionListView.setLayoutManager(new LinearLayoutManager(this));
-//            mAdapter = new ArrayAdapter<>(this,
-//                    R.layout.question_item,
-//                    R.id.questions,
-//                    questionList);
-//            mQuestionListView.setAdapter(mAdapter);
             } else {
-//            mAdapter.clear();
-//            mAdapter.addAll(questionList);
+                //            mAdapter.clear();
+                //            mAdapter.addAll(questionList);
                 mAdapter.notifyDataSetChanged();
             }
-            mAdapter.notifyDataSetChanged();
         }
-
-
-
 
         cursor.close();
         mDB.close();

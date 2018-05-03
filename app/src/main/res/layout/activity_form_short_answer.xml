@@ -8,20 +8,25 @@
     tools:context=".view.questionForm.FormShortAnswerActivity">
 
     <TextView
-        android:id="@+id/question_title"
+        android:id="@+id/question_title_short"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:text="@string/pertanyaan"
         android:textSize="@dimen/titleSize" />
 
     <EditText
-        android:id="@+id/question_content"
+        android:id="@+id/question_content_short"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/question_title" />
+        android:layout_below="@+id/question_title_short"
+        android:hint="@string/question_hint"
+        android:inputType="text" />
 
     <Button
-        android:id="@+id/button_save"
+        android:id="@+id/button_save_short"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -31,12 +36,12 @@
         android:text="@string/button_save" />
 
     <Button
-        android:id="@+id/button_cancel"
+        android:id="@+id/button_cancel_short"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@id/button_save"
-        android:layout_toStartOf="@id/button_save"
+        android:layout_toLeftOf="@id/button_save_short"
+        android:layout_toStartOf="@id/button_save_short"
         android:onClick="cancel"
         android:text="@string/button_cancel" />
 
