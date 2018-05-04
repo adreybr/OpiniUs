@@ -59,7 +59,7 @@ public class FillSurvey extends AppCompatActivity {
 
         Intent intent = getIntent();
         textJudul = intent.getStringExtra("surveyTarget");
-        Log.d("FILL SURVEY", "onCreate: " + textJudul);
+//        Log.d("FILL SURVEY", "onCreate: " + textJudul);
         if (textJudul != null) {
             mJudulSurvey.setText(textJudul);
         }
@@ -108,27 +108,16 @@ public class FillSurvey extends AppCompatActivity {
                         }
                         break;
                     case Question.TYPE_SINGLE_ANSWER:
-                        radioGroup = vi.itemView.findViewById(R.id.radio_group);
-
-                        int selectedId = radioGroup.getCheckedRadioButtonId();
-                        // find the radiobutton by returned id
-                        radioButton = (RadioButton) findViewById(selectedId);
-
-
-//                        RadioGroup radioGroup = vi.itemView.findViewById(R.id.radio_group);
-//                        radioGroup.getChildCount();
-//                        int id = radioGroup.getCheckedRadioButtonId();
-                        Log.d("radio", "submitSurvey: checkedRadio " + Integer.toString(radioGroup.getChildCount()));
-//                        RadioButton radioButton = radioGroup.findViewById(id);
+                        radioGroup = vi.itemView.findViewById(R.id.single_answer_radiogroup);
+                        RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                         answer = (String) radioButton.getText();
-//                        String[] answerSplit = questions.get(i).getAnswerList().split("#");
-//                        questions.get(i).setAnswer(answerSplit[radioGroup.getCheckedRadioButtonId()]);
+                        questions.get(i).setAnswer(answer);
                         break;
                     case Question.TYPE_MULTIPLE_ANSWER:
                         answer = "";
                         TextView textView = vi.itemView.findViewById(R.id.multi_answer_question);
                         LinearLayout linearLayout = vi.itemView.findViewById(R.id.listview_multiple);
-                        String count = Integer.toString(linearLayout.getChildCount());
+
                         for (int j = 0; j < linearLayout.getChildCount(); j++) {
                             View view = linearLayout.getChildAt(j);
                             CheckBox checkBox = view.findViewById(R.id.checkbox_option);
@@ -142,8 +131,6 @@ public class FillSurvey extends AppCompatActivity {
                             textView.setError("Wajib diisi...");
                             validation = false;
                         }
-//                        Log.d(" submitSurvey", "submitSurvey: count " + count);
-//                        Log.d(" submitSurvey", "submitSurvey: answer " + answer);
                         break;
                 }
             }

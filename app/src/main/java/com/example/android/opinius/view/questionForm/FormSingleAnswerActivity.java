@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -23,7 +24,6 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
     private EditText mAnswerChoiceInput;
     private RadioGroup mRadioGroup;
     private List<String> listAnswer;
-    private int choiceCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,7 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
             for (int i = 0; i < listAnswer.size(); i++) {
                 answerList += listAnswer.get(i) + "#";
             }
-            Log.d("ANSWER_LIST", answerList);
+//            Log.d("ANSWER_LIST", answerList);
             mHelper = new SurveyDBHelper(this);
             Long id = mHelper.insertQuestion(mJudulSurvey, mQuestionContent.getText().toString(), answerList, Question.TYPE_SINGLE_ANSWER);
             Intent replyIntent = new Intent();
@@ -86,15 +86,11 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
             listAnswer.add(addChoice);
             mRadioGroup = findViewById(R.id.radio_group);
 
-            RadioButton radioButton = new RadioButton(this);
-            radioButton.setText(addChoice);
-            radioButton.setId(choiceCount + 1);
-            choiceCount++;
-            mRadioGroup.addView(radioButton);
+            RadioButton option = new RadioButton(this);
+            option.setText(addChoice);
+            mRadioGroup.addView(option);
             mAnswerChoiceInput.setText("");
-
         } else {
-//            Toast.makeText(this, "Answer can't null", Toast.LENGTH_SHORT).show();
             mAnswerChoiceInput.setError("Answer can't be null");
         }
 

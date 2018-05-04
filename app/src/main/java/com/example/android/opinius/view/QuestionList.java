@@ -9,7 +9,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +38,7 @@ public class QuestionList extends AppCompatActivity {
     private RadioGroup radioGroup;
     private String message;
     private RadioButton radioButton;
+    private List<Question> questions;
 
     public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
@@ -73,10 +73,15 @@ public class QuestionList extends AppCompatActivity {
                 add_question();
                 return true;
             case R.id.save_survey:
-                Intent replyIntent = new Intent();
-                setResult(RESULT_OK, replyIntent);
-                finish();
-                return true;
+                if (questions != null) {
+                    Intent replyIntent = new Intent();
+                    setResult(RESULT_OK, replyIntent);
+                    finish();
+                    return true;
+                } else {
+                    mJudulSurvey.setError("Tambahkan Pertanyaan terlebih dahulu..");
+                    return super.onOptionsItemSelected(item);
+                }
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -137,7 +142,7 @@ public class QuestionList extends AppCompatActivity {
         if (cursor.getCount() != 0) {
             MicroOrm uOrm = new MicroOrm();
 
-            List<Question> questions;
+
             questions = uOrm.listFromCursor(cursor, Question.class);
 
 //            if (mAdapter == null) {

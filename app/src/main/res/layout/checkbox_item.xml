@@ -10,5 +10,4 @@
         android:src="@android:drawable/checkbox_off_background"
         android:text="Options" />
 
-
 </RelativeLayout>

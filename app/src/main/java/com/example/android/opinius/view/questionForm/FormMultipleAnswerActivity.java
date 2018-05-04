@@ -103,7 +103,6 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
         if (!addChoice.equals("")) {
             listAnswer.add(addChoice);
             mAnswerListView = findViewById(R.id.checkbox_group);
-            mAnswerChoiceInput.setText("");
 
             LayoutInflater mInflater = LayoutInflater.from(this);
 
@@ -111,6 +110,7 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
             CheckBox option = view.findViewById(R.id.checkbox_option);
             option.setText(addChoice);
             mAnswerListView.addView(view);
+            mAnswerChoiceInput.setText("");
 
         } else {
             mAnswerChoiceInput.setError("Answer can't be null");

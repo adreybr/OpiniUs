@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "Survey berhasil disimpan", Toast.LENGTH_LONG).show();
-                mAdapter.notifyDataSetChanged();
+//                mAdapter.notifyDataSetChanged();
                 updateUI();
             }
         }

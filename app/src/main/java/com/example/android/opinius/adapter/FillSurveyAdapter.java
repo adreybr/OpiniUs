@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class FillSurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         CardView cardView;
         public final TextView questionNumber;
         public final TextView question;
-        public final RadioGroup radioGroup;
+        public RadioGroup radioGroup;
 
         public SingleAnswerViewHolder(View itemView) {
             super(itemView);
@@ -119,13 +118,14 @@ public class FillSurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             singleAnswerViewHolder.questionNumber.setText(realPos + ".");
             singleAnswerViewHolder.question.setText(question.getQuestion());
 
-            String[] answerList = question.getAnswerList().split("#");
-            for (int i = 0; i < answerList.length; i++) {
-                Log.d("ADREY GANTENG", "onBindViewHolder: answerlistSINGLE " + answerList[i]);
+            String[] answerSplit = question.getAnswerList().split("#");
+            List<String> answerList = Arrays.asList(answerSplit);
+
+            for (int i = 0; i < answerList.size(); i++) {
                 RadioButton radioButton = new RadioButton(context);
-                radioButton.setText(answerList[i]);
-                radioButton.setId(i);
-                Log.d("itu int", "onBindViewHolder: itu " + Integer.toString(i));
+                radioButton.setId(1 + i);
+                radioButton.setText(answerList.get(i));
+
                 singleAnswerViewHolder.radioGroup.addView(radioButton);
             }
 
