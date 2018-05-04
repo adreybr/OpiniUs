@@ -22,4 +22,6 @@
     <string name="msg_no_questions">No Active Survey found!</string>
     <string name="submit_survey">Submit Survey</string>
     <string name="no_questions_found">No Questions found!</string>
+    <string name="delete_all_survey">Hapus semua survey</string>
+    <string name="send_to">This is my text to send.</string>
 </resources>

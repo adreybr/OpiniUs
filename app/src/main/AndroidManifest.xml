@@ -35,7 +35,12 @@
         <activity
             android:name=".view.ViewSurveyActivity"
             android:parentActivityName=".view.MainActivity" />
-        <activity android:name=".view.FillSurvey"></activity>
+        <activity
+            android:name=".view.FillSurvey"
+            android:parentActivityName=".view.MainActivity" />
+        <activity
+            android:name=".view.ViewFullSurvey"
+            android:parentActivityName=".view.ViewSurveyActivity"></activity>
     </application>
 
 </manifest>

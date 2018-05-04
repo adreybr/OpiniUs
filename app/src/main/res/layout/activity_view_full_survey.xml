@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_default"
+    tools:context=".view.QuestionList">
+
+    <TextView
+        android:id="@+id/survey_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin_question_item"
+        android:gravity="center_horizontal"
+        android:text="Judul Survey"
+        android:textSize="@dimen/titleSize"
+        android:textStyle="bold" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/question_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/survey_title" />
+
+    <TextView
+        android:id="@+id/empty_questions_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_top_no_questions"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/no_questions_found"
+        android:textColor="@color/msg_no_questions"
+        android:textSize="@dimen/msg_no_questions" />
+
+
+</RelativeLayout>

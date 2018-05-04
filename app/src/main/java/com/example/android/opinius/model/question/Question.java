@@ -54,6 +54,7 @@ public class Question {
         this.question = question;
         this.answerList = answerList;
         this.questionType = questionType;
+        this.answer = null;
 
     }
 

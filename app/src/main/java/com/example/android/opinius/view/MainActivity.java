@@ -78,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(MainActivity.this, ViewSurveyActivity.class);
                 startActivity(intent1);
                 return true;
+            case R.id.delete_all:
+                mHelper.deleteDatabase(this);
+                updateUI();
+                return true;
+            case R.id.menu_item_share:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.send_to));
+                sendIntent.setType("text/plain");
+                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -110,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(getApplicationContext(), "Survey berhasil disimpan", Toast.LENGTH_LONG).show();
+                mAdapter.notifyDataSetChanged();
                 updateUI();
             }
         }
@@ -132,51 +144,33 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI() {
         mDB = mHelper.getReadableDatabase();
+        String whereClause = Question.COLUMN_ANSWER + " is null or " + Question.COLUMN_ANSWER + " = ?";
+        String[] whereArgs = new String[]{""};
         Cursor cursor = mDB.query(true, Question.TABLE, new String[]{Question.COLUMN_ID,
                         Question.COLUMN_SURVEY_TITLE,
                         Question.COLUMN_QUESTION,
                         Question.COLUMN_ANSWER_LIST,
                         Question.COLUMN_QUESTION_TYPE,
                         Question.COLUMN_ANSWER},
-                null, null, Question.COLUMN_SURVEY_TITLE, null, Question.COLUMN_ID, null);
+                whereClause, whereArgs, Question.COLUMN_SURVEY_TITLE, null, Question.COLUMN_ID, null);
         if (cursor.getCount() != 0) {
             MicroOrm uOrm = new MicroOrm();
 
             questions = uOrm.listFromCursor(cursor, Question.class);
-            if (mAdapter == null) {
-                mAdapter = new SurveyAdapter(this, R.layout.survey_item, questions);
-                mSurveyList.setAdapter(mAdapter);
+//            if (mAdapter == null) {
+            mAdapter = new SurveyAdapter(this, R.layout.survey_item, questions);
+            mSurveyList.setAdapter(mAdapter);
 
-            } else {
-                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
-                mAdapter.clear();
-                mAdapter.addAll(questions);
-                mAdapter.notifyDataSetChanged();
-            }
+//            } else {
+//                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
+//                mAdapter.clear();
+//                mAdapter.addAll(questions);
+//                mAdapter.notifyDataSetChanged();
+//            }
 
         }
         cursor.close();
         mDB.close();
-//        while (cursor.moveToNext()) {
-//            int idx =
-//                    cursor.getColumnIndex(Question.COLUMN_SURVEY_TITLE);
-//            taskList.add(cursor.getString(idx));
-//
-//        }
-//
-//        if (mAdapter == null) {
-//            mAdapter = new ArrayAdapter<>(this,
-//                    R.layout.survey_item,
-//                    R.id.survey_title,
-//                    taskList);
-//            mSurveyList.setAdapter(mAdapter);
-//        } else {
-//            mAdapter.clear();
-//            mAdapter.addAll(taskList);
-//            mAdapter.notifyDataSetChanged();
-//        }
-//        cursor.close();
-//        mDB.close();
     }
 
     private void toggleEmptySurvey() {

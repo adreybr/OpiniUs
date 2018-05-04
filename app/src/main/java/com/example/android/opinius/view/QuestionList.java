@@ -73,8 +73,8 @@ public class QuestionList extends AppCompatActivity {
                 add_question();
                 return true;
             case R.id.save_survey:
-
-                setResult(RESULT_OK);
+                Intent replyIntent = new Intent();
+                setResult(RESULT_OK, replyIntent);
                 finish();
                 return true;
             default:

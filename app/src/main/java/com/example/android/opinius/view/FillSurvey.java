@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.adapter.FillSurveyAdapter;
@@ -26,6 +27,9 @@ import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.model.question.Question;
 import com.example.android.opinius.view.MainActivity;
 import com.example.android.opinius.view.ViewSurveyActivity;
+import com.example.android.opinius.view.questionForm.FormMultipleAnswerActivity;
+import com.example.android.opinius.view.questionForm.FormShortAnswerActivity;
+import com.example.android.opinius.view.questionForm.FormSingleAnswerActivity;
 
 import org.chalup.microorm.MicroOrm;
 
@@ -77,7 +81,6 @@ public class FillSurvey extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.submit_survey:
                 submitSurvey();
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -93,10 +96,9 @@ public class FillSurvey extends AppCompatActivity {
             int type = mAdapter.getItemViewType(i);
             RecyclerView.ViewHolder vi = mQuestionListView.findViewHolderForLayoutPosition(i);
 
-            while (validation) {
-
+            if (validation) {
                 switch (type) {
-                    case 1:
+                    case Question.TYPE_SHORT_ANSWER:
                         EditText editText = vi.itemView.findViewById(R.id.answer_input_short);
                         if (editText.getText().toString().equals("")) {
                             editText.setError("Wajib diisi...");
@@ -105,17 +107,26 @@ public class FillSurvey extends AppCompatActivity {
                             questions.get(i).setAnswer(editText.getText().toString());
                         }
                         break;
-                    case 2:
-                        RadioGroup radioGroup = vi.itemView.findViewById(R.id.radio_group);
-                        int id = radioGroup.getCheckedRadioButtonId();
-                        RadioButton radioButton = radioGroup.findViewById(id);
+                    case Question.TYPE_SINGLE_ANSWER:
+                        radioGroup = vi.itemView.findViewById(R.id.radio_group);
+
+                        int selectedId = radioGroup.getCheckedRadioButtonId();
+                        // find the radiobutton by returned id
+                        radioButton = (RadioButton) findViewById(selectedId);
+
+
+//                        RadioGroup radioGroup = vi.itemView.findViewById(R.id.radio_group);
+//                        radioGroup.getChildCount();
+//                        int id = radioGroup.getCheckedRadioButtonId();
+                        Log.d("radio", "submitSurvey: checkedRadio " + Integer.toString(radioGroup.getChildCount()));
+//                        RadioButton radioButton = radioGroup.findViewById(id);
                         answer = (String) radioButton.getText();
 //                        String[] answerSplit = questions.get(i).getAnswerList().split("#");
 //                        questions.get(i).setAnswer(answerSplit[radioGroup.getCheckedRadioButtonId()]);
-                        Log.d("radio", "submitSurvey: checkedRadio " + answer);
                         break;
-                    case 3:
+                    case Question.TYPE_MULTIPLE_ANSWER:
                         answer = "";
+                        TextView textView = vi.itemView.findViewById(R.id.multi_answer_question);
                         LinearLayout linearLayout = vi.itemView.findViewById(R.id.listview_multiple);
                         String count = Integer.toString(linearLayout.getChildCount());
                         for (int j = 0; j < linearLayout.getChildCount(); j++) {
@@ -125,22 +136,28 @@ public class FillSurvey extends AppCompatActivity {
                                 answer += checkBox.getText() + "#";
                             }
                         }
-
-                        Log.d(" submitSurvey", "submitSurvey: count " + count);
-                        Log.d(" submitSurvey", "submitSurvey: answer " + answer);
+                        if (answer.length() > 0) {
+                            questions.get(i).setAnswer(answer);
+                        } else {
+                            textView.setError("Wajib diisi...");
+                            validation = false;
+                        }
+//                        Log.d(" submitSurvey", "submitSurvey: count " + count);
+//                        Log.d(" submitSurvey", "submitSurvey: answer " + answer);
                         break;
                 }
             }
-
-//            updateQuestion(questions.get(i).getAnswer(), i);
-
-
+            updateQuestion(questions.get(i).getAnswer(), i);
         }
 
-
-        Intent replyIntent = new Intent();
-        setResult(RESULT_OK, replyIntent);
-        finish();
+        if (!validation) {
+            Toast.makeText(this, "Isi Semua Pertanyaan!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Hasil Survey telah disimpan..", Toast.LENGTH_SHORT).show();
+            Intent replyIntent = new Intent();
+            setResult(RESULT_OK, replyIntent);
+            finish();
+        }
     }
 
     private void updateQuestion(String answer, int position) {
