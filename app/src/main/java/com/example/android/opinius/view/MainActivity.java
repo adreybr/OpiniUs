@@ -88,8 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
                             public void onClick(DialogInterface arg0, int arg1) {
                                 mHelper.deleteDatabase(context);
-//                                mAdapter.clear();
-                                mAdapter.notifyDataSetChanged();
+                                updateUI();
                                 toggleEmptySurvey();
                             }
                         }).create().show();
