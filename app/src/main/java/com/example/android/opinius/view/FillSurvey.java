@@ -59,7 +59,6 @@ public class FillSurvey extends AppCompatActivity {
 
         Intent intent = getIntent();
         textJudul = intent.getStringExtra("surveyTarget");
-//        Log.d("FILL SURVEY", "onCreate: " + textJudul);
         if (textJudul != null) {
             mJudulSurvey.setText(textJudul);
         }
@@ -88,53 +87,61 @@ public class FillSurvey extends AppCompatActivity {
     }
 
     private void submitSurvey() {
-
         boolean validation = true;
 
         for (int i = 0; i < questions.size(); i++) {
-            String answer;
+            String answer = "";
             int type = mAdapter.getItemViewType(i);
             RecyclerView.ViewHolder vi = mQuestionListView.findViewHolderForLayoutPosition(i);
 
-            if (validation) {
-                switch (type) {
-                    case Question.TYPE_SHORT_ANSWER:
-                        EditText editText = vi.itemView.findViewById(R.id.answer_input_short);
-                        if (editText.getText().toString().equals("")) {
-                            editText.setError("Wajib diisi...");
-                            validation = false;
-                        } else {
-                            questions.get(i).setAnswer(editText.getText().toString());
-                        }
-                        break;
-                    case Question.TYPE_SINGLE_ANSWER:
-                        radioGroup = vi.itemView.findViewById(R.id.single_answer_radiogroup);
-                        RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+            switch (type) {
+                case Question.TYPE_SHORT_ANSWER:
+                    EditText editText = vi.itemView.findViewById(R.id.answer_input_short);
+                    if (editText.getText().toString().equals("")) {
+                        editText.setError("Wajib diisi...");
+                        validation = false;
+                    } else {
+                        answer = editText.getText().toString();
+                        questions.get(i).setAnswer(answer);
+                    }
+                    break;
+                case Question.TYPE_SINGLE_ANSWER:
+                    radioGroup = vi.itemView.findViewById(R.id.single_answer_radiogroup);
+                    RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
+                    if (radioButton == null) {
+                        TextView question = vi.itemView.findViewById(R.id.single_answer_question);
+                        question.setError("Wajib diisi...");
+                        validation = false;
+                    } else {
                         answer = (String) radioButton.getText();
                         questions.get(i).setAnswer(answer);
-                        break;
-                    case Question.TYPE_MULTIPLE_ANSWER:
-                        answer = "";
-                        TextView textView = vi.itemView.findViewById(R.id.multi_answer_question);
-                        LinearLayout linearLayout = vi.itemView.findViewById(R.id.listview_multiple);
+                    }
+                    break;
+                case Question.TYPE_MULTIPLE_ANSWER:
+                    answer = "";
+                    TextView textView = vi.itemView.findViewById(R.id.multi_answer_question);
+                    LinearLayout linearLayout = vi.itemView.findViewById(R.id.listview_multiple);
 
-                        for (int j = 0; j < linearLayout.getChildCount(); j++) {
-                            View view = linearLayout.getChildAt(j);
-                            CheckBox checkBox = view.findViewById(R.id.checkbox_option);
-                            if (checkBox.isChecked()) {
-                                answer += checkBox.getText() + "#";
-                            }
+                    for (int j = 0; j < linearLayout.getChildCount(); j++) {
+                        View view = linearLayout.getChildAt(j);
+                        CheckBox checkBox = view.findViewById(R.id.checkbox_option);
+                        if (checkBox.isChecked()) {
+                            answer += checkBox.getText() + "#";
                         }
-                        if (answer.length() > 0) {
-                            questions.get(i).setAnswer(answer);
-                        } else {
-                            textView.setError("Wajib diisi...");
-                            validation = false;
-                        }
-                        break;
-                }
+                    }
+                    if (answer.length() == 0) {
+                        textView.setError("Wajib diisi...");
+                        validation = false;
+                    } else {
+                        questions.get(i).setAnswer(answer);
+                    }
+                    break;
+                default:
+                    questions.get(i).setAnswer(answer);
+                    break;
             }
             updateQuestion(questions.get(i).getAnswer(), i);
+
         }
 
         if (!validation) {
@@ -150,16 +157,13 @@ public class FillSurvey extends AppCompatActivity {
     private void updateQuestion(String answer, int position) {
         SQLiteDatabase db = mHelper.getWritableDatabase();
         Question q = questions.get(position);
-        // updating note text
         q.setAnswer(answer);
 
         // updating note in db
         mHelper.updateQuestion(q);
-
         // refreshing the list
-        questions.set(position, q);
-        mAdapter.notifyItemChanged(position);
-
+//        questions.set(position, q);
+//        mAdapter.notifyItemChanged(position);
         toggleEmptyQuestion();
     }
 

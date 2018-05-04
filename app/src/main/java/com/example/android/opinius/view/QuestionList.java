@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -39,6 +40,7 @@ public class QuestionList extends AppCompatActivity {
     private String message;
     private RadioButton radioButton;
     private List<Question> questions;
+    private ImageView questionImage;
 
     public static final String JUDUL_SURVEY = "com.example.android.opinius.extra.JUDUL_SURVEY";
 
@@ -52,6 +54,7 @@ public class QuestionList extends AppCompatActivity {
                 intent.getStringExtra("JUDUL");
         mJudulSurvey = (TextView) findViewById(R.id.survey_title);
         mJudulSurvey.setText(message);
+        questionImage = findViewById(R.id.question_image);
 
         mHelper = new SurveyDBHelper(this);
         mQuestionListView = (RecyclerView) findViewById(R.id.question_list);
@@ -79,7 +82,7 @@ public class QuestionList extends AppCompatActivity {
                     finish();
                     return true;
                 } else {
-                    mJudulSurvey.setError("Tambahkan Pertanyaan terlebih dahulu..");
+                    Toast.makeText(this, "Tambahkan Pertanyaan terlebih dahulu..", Toast.LENGTH_SHORT).show();
                     return super.onOptionsItemSelected(item);
                 }
             default:
