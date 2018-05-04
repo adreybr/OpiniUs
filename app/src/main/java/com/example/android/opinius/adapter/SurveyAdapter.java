@@ -47,7 +47,7 @@ public class SurveyAdapter extends ArrayAdapter<Question> {
         }
 
         Question question = surveyList.get(position);
-        String realPos = Integer.toString(position + 1);
+        String realPos = Integer.toString(position + 1) + ". ";
 
         surveyHolder.surveyNumber.setText(realPos);
         surveyHolder.surveyTitle.setText(question.getSurveyTitle());
