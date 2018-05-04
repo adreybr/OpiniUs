@@ -55,7 +55,6 @@ public class ViewFullSurvey extends AppCompatActivity {
         if (textJudul != null) {
             mJudulSurvey.setText(textJudul);
         }
-
         updateUI();
         toggleEmptyQuestion();
     }

@@ -34,13 +34,16 @@
             android:parentActivityName=".view.QuestionList" />
         <activity
             android:name=".view.ViewSurveyActivity"
+            android:label="Lihat Survey"
             android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.FillSurvey"
+            android:label="Isi Survey"
             android:parentActivityName=".view.MainActivity" />
         <activity
             android:name=".view.ViewFullSurvey"
-            android:parentActivityName=".view.ViewSurveyActivity"></activity>
+            android:label="Lihat Hasil Survey"
+            android:parentActivityName=".view.ViewSurveyActivity" />
     </application>
 
 </manifest>

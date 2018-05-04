@@ -82,13 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 mHelper.deleteDatabase(this);
                 updateUI();
                 return true;
-            case R.id.menu_item_share:
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.send_to));
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
-                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
