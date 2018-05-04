@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.model.question.Question;
+import com.example.android.opinius.view.QuestionList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,16 +53,19 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                Intent replyIntent = new Intent();
-                replyIntent.putExtra("JUDUL", mJudulSurvey);
-                setResult(RESULT_OK, replyIntent);
+                // This is called when the Home (Up) button is pressed
+                // in the Action Bar.
+                Intent parentActivityIntent = new Intent(this, QuestionList.class);
+                parentActivityIntent.putExtra("JUDUL", mJudulSurvey);
+                parentActivityIntent.addFlags(
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(parentActivityIntent);
+                finish();
                 return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     public void cancel(View view) {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,6 +14,7 @@ import android.widget.RadioGroup;
 import com.example.android.opinius.R;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.model.question.Question;
+import com.example.android.opinius.view.QuestionList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,24 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
                 addRadioButtons();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // This is called when the Home (Up) button is pressed
+                // in the Action Bar.
+                Intent parentActivityIntent = new Intent(this, QuestionList.class);
+                parentActivityIntent.putExtra("JUDUL", mJudulSurvey);
+                parentActivityIntent.addFlags(
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(parentActivityIntent);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void cancel(View view) {
