@@ -40,7 +40,6 @@ public class ViewSurveyActivity extends AppCompatActivity {
         mHelper = new SurveyDBHelper(this);
         mSurveyList = (ListView) findViewById(R.id.list_survey);
         noQuestionsView = (TextView) findViewById(R.id.empty_questions_view);
-        toggleEmptySurvey();
         updateUI();
 
         mSurveyList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
@@ -64,29 +63,28 @@ public class ViewSurveyActivity extends AppCompatActivity {
                         Question.COLUMN_QUESTION_TYPE,
                         Question.COLUMN_ANSWER},
                 whereClause, whereArgs, Question.COLUMN_SURVEY_TITLE, null, Question.COLUMN_ID, null);
-        if (cursor.getCount() != 0) {
-            MicroOrm uOrm = new MicroOrm();
+//        if (cursor.getCount() != 0) {
+        MicroOrm uOrm = new MicroOrm();
 
-            questions = uOrm.listFromCursor(cursor, Question.class);
-//            if (mAdapter == null) {
+        questions = uOrm.listFromCursor(cursor, Question.class);
+        if (mAdapter == null) {
             mAdapter = new SurveyAdapter(this, R.layout.survey_item, questions);
             mSurveyList.setAdapter(mAdapter);
-
-//            } else {
-//                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
-//                mAdapter.clear();
-//                mAdapter.addAll(questions);
-//                mAdapter.notifyDataSetChanged();
-//            }
-
+        } else {
+            Log.d("mAdapter", "updateUI: mAdapter = NOT null");
+            mAdapter.clear();
+            mAdapter.addAll(questions);
+            mAdapter.notifyDataSetChanged();
         }
+//    }
+        toggleEmptySurvey();
         cursor.close();
         mDB.close();
     }
 
     private void toggleEmptySurvey() {
         // you can check notesList.size() > 0
-        if (mHelper.getQuestionCount() > 0) {
+        if (questions.size() > 0) {
             noQuestionsView.setVisibility(View.GONE);
         } else {
             noQuestionsView.setVisibility(View.VISIBLE);

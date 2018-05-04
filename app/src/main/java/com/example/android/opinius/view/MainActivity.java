@@ -1,5 +1,6 @@
 package com.example.android.opinius.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView mSurveyList;
     private ArrayAdapter<Question> mAdapter;
     private TextView noQuestionsView;
-    private List<Question> questions;
+    private List<Question> questions = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         mHelper = new SurveyDBHelper(this);
         mSurveyList = (ListView) findViewById(R.id.list_survey);
         noQuestionsView = (TextView) findViewById(R.id.empty_questions_view);
-        toggleEmptySurvey();
         updateUI();
 
         mSurveyList.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
@@ -79,8 +79,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent1);
                 return true;
             case R.id.delete_all:
-                mHelper.deleteDatabase(this);
-                updateUI();
+                final Context context = this;
+                new AlertDialog.Builder(this)
+                        .setTitle("Really Delete?")
+                        .setMessage("Are you sure you want to delete all survey?")
+                        .setNegativeButton(android.R.string.no, null)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                mHelper.deleteDatabase(context);
+//                                mAdapter.clear();
+                                mAdapter.notifyDataSetChanged();
+                                toggleEmptySurvey();
+                            }
+                        }).create().show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -113,9 +125,15 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "Survey berhasil disimpan", Toast.LENGTH_LONG).show();
-//                mAdapter.notifyDataSetChanged();
+                Toast.makeText(getApplicationContext(), "Survey Baru berhasil disimpan", Toast.LENGTH_LONG).show();
                 updateUI();
+                toggleEmptySurvey();
+            }
+        } else if (requestCode == 109) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(getApplicationContext(), "Survey berhasil diisi", Toast.LENGTH_LONG).show();
+                updateUI();
+                toggleEmptySurvey();
             }
         }
     }
@@ -146,29 +164,31 @@ public class MainActivity extends AppCompatActivity {
                         Question.COLUMN_QUESTION_TYPE,
                         Question.COLUMN_ANSWER},
                 whereClause, whereArgs, Question.COLUMN_SURVEY_TITLE, null, Question.COLUMN_ID, null);
-        if (cursor.getCount() != 0) {
-            MicroOrm uOrm = new MicroOrm();
+//        if (cursor.getCount() != 0) {
+        MicroOrm uOrm = new MicroOrm();
 
-            questions = uOrm.listFromCursor(cursor, Question.class);
-//            if (mAdapter == null) {
+        questions = uOrm.listFromCursor(cursor, Question.class);
+        if (mAdapter == null) {
             mAdapter = new SurveyAdapter(this, R.layout.survey_item, questions);
             mSurveyList.setAdapter(mAdapter);
-
-//            } else {
-//                Log.d("mAdapter", "updateUI: mAdapter = NOT null");
-//                mAdapter.clear();
-//                mAdapter.addAll(questions);
-//                mAdapter.notifyDataSetChanged();
-//            }
-
+        } else {
+            Log.d("mAdapter", "updateUI: mAdapter = NOT null");
+            mAdapter.clear();
+            mAdapter.addAll(questions);
+            mAdapter.notifyDataSetChanged();
         }
+
+//        } else {
+//            questions = null;
+//        }
+        toggleEmptySurvey();
         cursor.close();
         mDB.close();
     }
 
     private void toggleEmptySurvey() {
         // you can check notesList.size() > 0
-        if (mHelper.getQuestionCount() > 0) {
+        if (questions.size() > 0) {
             noQuestionsView.setVisibility(View.GONE);
         } else {
             noQuestionsView.setVisibility(View.VISIBLE);

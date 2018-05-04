@@ -22,7 +22,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:fontFamily="sans-serif-light"
-        android:text="@string/msg_no_questions"
+        android:text="@string/no_completed_survey_found"
         android:textColor="@color/msg_no_questions"
         android:textSize="@dimen/msg_no_questions" />
 

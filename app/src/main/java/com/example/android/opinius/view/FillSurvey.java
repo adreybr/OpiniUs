@@ -65,8 +65,6 @@ public class FillSurvey extends AppCompatActivity {
 
         updateUI();
         toggleEmptyQuestion();
-
-
     }
 
     @Override
@@ -147,7 +145,7 @@ public class FillSurvey extends AppCompatActivity {
         if (!validation) {
             Toast.makeText(this, "Isi Semua Pertanyaan!", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Hasil Survey telah disimpan..", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Hasil Survey telah disimpan..", Toast.LENGTH_SHORT).show();
             Intent replyIntent = new Intent();
             setResult(RESULT_OK, replyIntent);
             finish();
@@ -168,14 +166,12 @@ public class FillSurvey extends AppCompatActivity {
     }
 
     private void toggleEmptyQuestion() {
-
         // you can check notesList.size() > 0
         if (questions.size() > 0) {
             noQuestionsView.setVisibility(View.GONE);
         } else {
             noQuestionsView.setVisibility(View.VISIBLE);
         }
-
     }
 
     public void updateUI() {
@@ -199,6 +195,7 @@ public class FillSurvey extends AppCompatActivity {
             mQuestionListView.setLayoutManager(new LinearLayoutManager(this));
 
         }
+
         cursor.close();
         mDB.close();
     }

@@ -24,4 +24,5 @@
     <string name="no_questions_found">No Questions found!</string>
     <string name="delete_all_survey">Hapus semua survey</string>
     <string name="send_to">Share Survey</string>
+    <string name="no_completed_survey_found">No Completed Survey Found</string>
 </resources>
