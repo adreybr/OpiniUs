@@ -157,6 +157,7 @@ public class FillSurvey extends AppCompatActivity {
                     questions.get(i).setAnswer(answer);
                     break;
             }
+
             if (validation) {
                 updateQuestion(questions.get(i).getAnswer(), i);
             } else {

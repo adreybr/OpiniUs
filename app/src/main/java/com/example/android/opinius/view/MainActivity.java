@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,8 +32,6 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     SQLiteDatabase mDB;
-
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private SurveyDBHelper mHelper;
     private ListView mSurveyList;
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent in = new Intent(MainActivity.this, FillSurvey.class);
-                Log.d("COBAEINS", "onItemClick: " + questions.get(position).getSurveyTitle());
                 in.putExtra("surveyTarget", questions.get(position).getSurveyTitle());
                 startActivityForResult(in, 109);
             }
@@ -102,21 +100,49 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = MainActivity.this.getLayoutInflater();
         final View dialogLayout = inflater.inflate(R.layout.dialog_add_survey, null);
 
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
-                .setPositiveButton("SIMPAN", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        EditText mJudul = dialogLayout.findViewById(R.id.isiJudul);
-                        Intent intent = new Intent(MainActivity.this, QuestionList.class);
-                        intent.putExtra("JUDUL", mJudul.getText().toString());
-                        intent.putExtras(intent);
-                        startActivityForResult(intent, 101);
-                    }
-                })
+                .setPositiveButton("SIMPAN", null)
                 .setNegativeButton("BATAL", null)
                 .create();
-        dialog.show();
+
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(final DialogInterface dialog) {
+                Button buttonPositive = ((AlertDialog) dialog).getButton(DialogInterface.BUTTON_POSITIVE);
+                buttonPositive.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        boolean validation = true;
+                        EditText mJudul = ((AlertDialog) dialog).findViewById(R.id.isiJudul);
+
+                        for (int i = 0; i < questions.size(); i++) {
+                            if (questions.get(i).getSurveyTitle().equals(mJudul.getText().toString())) {
+                                mJudul.setError("Nama Survey sudah terpakai");
+                                validation = false;
+                                break;
+                            }
+                        }
+
+                        if (mJudul.getText().toString().equals("")) {
+                            mJudul.setError("Wajib diisi..");
+                            validation = false;
+                        }
+
+                        if (validation) {
+                            Intent intent = new Intent(MainActivity.this, QuestionList.class);
+                            intent.putExtra("JUDUL", mJudul.getText().toString());
+                            intent.putExtras(intent);
+                            startActivityForResult(intent, 101);
+                            alertDialog.dismiss();
+                        }
+                    }
+                });
+            }
+        });
+
+        alertDialog.show();
     }
 
     @Override
