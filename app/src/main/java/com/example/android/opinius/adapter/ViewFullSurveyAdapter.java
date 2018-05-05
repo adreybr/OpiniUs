@@ -4,21 +4,14 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.model.question.Question;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ViewFullSurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -29,12 +22,12 @@ public class ViewFullSurveyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     class ShortAnswerViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        public final TextView questionNumber;
+        final TextView questionNumber;
         public final TextView question;
         public final TextView answer;
 
 
-        public ShortAnswerViewHolder(View itemView) {
+        ShortAnswerViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardview);
             questionNumber = itemView.findViewById(R.id.short_answer_question_number);
@@ -45,12 +38,12 @@ public class ViewFullSurveyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     class SingleAnswerViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        public final TextView questionNumber;
+        final TextView questionNumber;
         public final TextView question;
         public final TextView answer;
 
 
-        public SingleAnswerViewHolder(View itemView) {
+        SingleAnswerViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardview);
             questionNumber = itemView.findViewById(R.id.short_answer_question_number);
@@ -61,12 +54,12 @@ public class ViewFullSurveyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     class MultipleAnswerViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        public final TextView questionNumber;
+        final TextView questionNumber;
         public final TextView question;
         public final TextView answer;
 
 
-        public MultipleAnswerViewHolder(View itemView) {
+        MultipleAnswerViewHolder(View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cardview);
             questionNumber = itemView.findViewById(R.id.short_answer_question_number);
@@ -130,10 +123,14 @@ public class ViewFullSurveyAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             multipleAnswerViewHolder.question.setText(question.getQuestion());
 
             String answer = "";
-            String[] answerSplit = question.getAnswerList().split("#");
+            String[] answerSplit = question.getAnswer().split("#");
 
             for (int i = 0; i < answerSplit.length; i++) {
-                answer += answerSplit[i] + ", ";
+                if (i == answerSplit.length - 1) {
+                    answer += answerSplit[i];
+                } else {
+                    answer += answerSplit[i] + ", ";
+                }
             }
             multipleAnswerViewHolder.answer.setText(answer);
         }

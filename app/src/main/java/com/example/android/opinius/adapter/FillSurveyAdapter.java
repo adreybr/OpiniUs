@@ -142,6 +142,7 @@ public class FillSurveyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 View view = mInflater.inflate(R.layout.checkbox_item, multipleAnswerViewHolder.listView, false);
                 CheckBox option = view.findViewById(R.id.checkbox_option);
                 option.setText(answerList.get(i));
+                option.setId((i+1)*11);
                 multipleAnswerViewHolder.listView.addView(view);
             }
         }

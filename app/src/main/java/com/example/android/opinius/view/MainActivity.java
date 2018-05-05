@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void toggleEmptySurvey() {
-        // you can check notesList.size() > 0
         if (questions.size() > 0) {
             noQuestionsView.setVisibility(View.GONE);
         } else {

@@ -3,12 +3,10 @@ package com.example.android.opinius.view;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,14 +20,8 @@ import android.widget.Toast;
 
 import com.example.android.opinius.R;
 import com.example.android.opinius.adapter.FillSurveyAdapter;
-import com.example.android.opinius.adapter.QuestionListRecyclerAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.model.question.Question;
-import com.example.android.opinius.view.MainActivity;
-import com.example.android.opinius.view.ViewSurveyActivity;
-import com.example.android.opinius.view.questionForm.FormMultipleAnswerActivity;
-import com.example.android.opinius.view.questionForm.FormShortAnswerActivity;
-import com.example.android.opinius.view.questionForm.FormSingleAnswerActivity;
 
 import org.chalup.microorm.MicroOrm;
 
@@ -119,12 +111,14 @@ public class FillSurvey extends AppCompatActivity {
                     answer = "";
                     TextView textView = vi.itemView.findViewById(R.id.multi_answer_question);
                     LinearLayout linearLayout = vi.itemView.findViewById(R.id.listview_multiple);
-
                     for (int j = 0; j < linearLayout.getChildCount(); j++) {
-                        View view = linearLayout.getChildAt(j);
-                        CheckBox checkBox = view.findViewById(R.id.checkbox_option);
+                        CheckBox checkBox = (CheckBox) linearLayout.getChildAt(j);
                         if (checkBox.isChecked()) {
-                            answer += checkBox.getText() + "#";
+                            if (j == linearLayout.getChildCount() - 1) {
+                                answer += checkBox.getText().toString();
+                            } else {
+                                answer += checkBox.getText().toString() + "#";
+                            }
                         }
                     }
                     if (answer.length() == 0) {
@@ -157,16 +151,11 @@ public class FillSurvey extends AppCompatActivity {
         Question q = questions.get(position);
         q.setAnswer(answer);
 
-        // updating note in db
         mHelper.updateQuestion(q);
-        // refreshing the list
-//        questions.set(position, q);
-//        mAdapter.notifyItemChanged(position);
         toggleEmptyQuestion();
     }
 
     private void toggleEmptyQuestion() {
-        // you can check notesList.size() > 0
         if (questions.size() > 0) {
             noQuestionsView.setVisibility(View.GONE);
         } else {
@@ -193,9 +182,7 @@ public class FillSurvey extends AppCompatActivity {
             mAdapter = new FillSurveyAdapter(this, questions);
             mQuestionListView.setAdapter(mAdapter);
             mQuestionListView.setLayoutManager(new LinearLayoutManager(this));
-
         }
-
         cursor.close();
         mDB.close();
     }
