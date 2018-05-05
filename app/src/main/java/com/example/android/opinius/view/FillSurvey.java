@@ -32,9 +32,6 @@ public class FillSurvey extends AppCompatActivity {
     private RecyclerView mQuestionListView;
     private FillSurveyAdapter mAdapter;
     private TextView mJudulSurvey;
-    private RadioGroup radioGroup;
-    private RadioButton radioButton;
-    private String textJudul;
     private List<Question> questions;
     private TextView noQuestionsView;
 
@@ -50,7 +47,7 @@ public class FillSurvey extends AppCompatActivity {
         mJudulSurvey = (TextView) findViewById(R.id.survey_title);
 
         Intent intent = getIntent();
-        textJudul = intent.getStringExtra("surveyTarget");
+        String textJudul = intent.getStringExtra("surveyTarget");
         if (textJudul != null) {
             mJudulSurvey.setText(textJudul);
         }
@@ -120,7 +117,7 @@ public class FillSurvey extends AppCompatActivity {
                     break;
                 case Question.TYPE_SINGLE_ANSWER:
                     TextView question = vi.itemView.findViewById(R.id.single_answer_question);
-                    radioGroup = vi.itemView.findViewById(R.id.single_answer_radiogroup);
+                    RadioGroup radioGroup = vi.itemView.findViewById(R.id.single_answer_radiogroup);
                     RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                     if (radioButton == null) {
                         question.setError("Wajib diisi...");

@@ -116,9 +116,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         boolean validation = true;
                         EditText mJudul = ((AlertDialog) dialog).findViewById(R.id.isiJudul);
+                        List<Question> localQuestion = checkAllSurvey();
 
-                        for (int i = 0; i < questions.size(); i++) {
-                            if (questions.get(i).getSurveyTitle().equals(mJudul.getText().toString())) {
+                        for (int i = 0; i < localQuestion.size(); i++) {
+                            if (localQuestion.get(i).getSurveyTitle().equals(mJudul.getText().toString())) {
                                 mJudul.setError("Nama Survey sudah terpakai");
                                 validation = false;
                                 break;
@@ -217,6 +218,23 @@ public class MainActivity extends AppCompatActivity {
         } else {
             noQuestionsView.setVisibility(View.VISIBLE);
         }
+    }
+
+    private List<Question> checkAllSurvey() {
+        mDB = mHelper.getReadableDatabase();
+        Cursor cursor = mDB.query(true, Question.TABLE, new String[]{Question.COLUMN_ID,
+                        Question.COLUMN_SURVEY_TITLE,
+                        Question.COLUMN_QUESTION,
+                        Question.COLUMN_ANSWER_LIST,
+                        Question.COLUMN_QUESTION_TYPE,
+                        Question.COLUMN_ANSWER},
+                null, null, Question.COLUMN_SURVEY_TITLE, null, Question.COLUMN_ID, null);
+        MicroOrm uOrm = new MicroOrm();
+        List<Question> localQuestion = uOrm.listFromCursor(cursor, Question.class);
+        cursor.close();
+        mDB.close();
+        return localQuestion;
+
     }
 
 }
