@@ -7,20 +7,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.opinius.R;
-import com.example.android.opinius.adapter.FillSurveyAdapter;
 import com.example.android.opinius.adapter.ViewFullSurveyAdapter;
 import com.example.android.opinius.database.SurveyDBHelper;
 import com.example.android.opinius.model.question.Question;
@@ -69,11 +62,7 @@ public class ViewFullSurvey extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_item_share:
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, textJudul);
-                sendIntent.setType("text/plain");
-                startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.send_to)));
+                shareSurvey();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -87,6 +76,39 @@ public class ViewFullSurvey extends AppCompatActivity {
         } else {
             noQuestionsView.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void shareSurvey() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.setType("text/plain");
+        String shareBody = "";
+
+        for (int i = 0; i < questions.size(); i++) {
+            int number = i + 1;
+            if (questions.get(i).getQuestionType() == Question.TYPE_MULTIPLE_ANSWER) {
+                String normalizedAnswer = "";
+                String[] splitAnswer = questions.get(i).getAnswer().split("#");
+                for (int j = 0; j < splitAnswer.length; j++) {
+                    if (j == splitAnswer.length - 1) {
+                        normalizedAnswer += splitAnswer[j];
+                    } else {
+                        normalizedAnswer += splitAnswer[j] + ", ";
+                    }
+                }
+                shareBody += "<p>" + number + ". " + questions.get(i).getQuestion() + "<br>"
+                        + normalizedAnswer + "</p>";
+            } else {
+                shareBody += "<p>" + number + ". " + questions.get(i).getQuestion() + "<br>"
+                        + questions.get(i).getAnswer() + "</p>";
+            }
+        }
+
+
+        String shareString = Html.fromHtml("<p>SURVEY RESULT <br>" + mJudulSurvey.getText().toString() + "</p>" + shareBody).toString();
+        sendIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, mJudulSurvey.getText().toString());
+        sendIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareString);
+        startActivity(Intent.createChooser(sendIntent, "Share using"));
     }
 
     public void updateUI() {

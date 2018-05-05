@@ -54,7 +54,7 @@ public class ViewSurveyActivity extends AppCompatActivity {
 
     private void updateUI() {
         mDB = mHelper.getReadableDatabase();
-        String whereClause = Question.COLUMN_ANSWER + " is not null or " + Question.COLUMN_ANSWER + " != ?";
+        String whereClause = Question.COLUMN_ANSWER + " is not null and " + Question.COLUMN_ANSWER + " != ?";
         String[] whereArgs = new String[]{""};
         Cursor cursor = mDB.query(true, Question.TABLE, new String[]{Question.COLUMN_ID,
                         Question.COLUMN_SURVEY_TITLE,

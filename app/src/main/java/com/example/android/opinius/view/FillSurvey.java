@@ -71,10 +71,33 @@ public class FillSurvey extends AppCompatActivity {
             case R.id.submit_survey:
                 submitSurvey();
                 return true;
+            case android.R.id.home:
+                resetAnswer();
+                Intent parentActivityIntent = new Intent(this, MainActivity.class);
+                parentActivityIntent.addFlags(
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                                Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(parentActivityIntent);
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        resetAnswer();
+        super.onBackPressed();
+    }
+
+    private void resetAnswer() {
+        for (int i = 0; i < questions.size(); i++) {
+            questions.get(i).setAnswer("");
+            updateQuestion("", i);
+        }
+    }
+
 
     private void submitSurvey() {
         boolean validation = true;
@@ -96,13 +119,14 @@ public class FillSurvey extends AppCompatActivity {
                     }
                     break;
                 case Question.TYPE_SINGLE_ANSWER:
+                    TextView question = vi.itemView.findViewById(R.id.single_answer_question);
                     radioGroup = vi.itemView.findViewById(R.id.single_answer_radiogroup);
                     RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                     if (radioButton == null) {
-                        TextView question = vi.itemView.findViewById(R.id.single_answer_question);
                         question.setError("Wajib diisi...");
                         validation = false;
                     } else {
+                        question.setError(null);
                         answer = (String) radioButton.getText();
                         questions.get(i).setAnswer(answer);
                     }
@@ -125,6 +149,7 @@ public class FillSurvey extends AppCompatActivity {
                         textView.setError("Wajib diisi...");
                         validation = false;
                     } else {
+                        textView.setError(null);
                         questions.get(i).setAnswer(answer);
                     }
                     break;
@@ -132,7 +157,11 @@ public class FillSurvey extends AppCompatActivity {
                     questions.get(i).setAnswer(answer);
                     break;
             }
-            updateQuestion(questions.get(i).getAnswer(), i);
+            if (validation) {
+                updateQuestion(questions.get(i).getAnswer(), i);
+            } else {
+                updateQuestion("", i);
+            }
 
         }
 
@@ -164,6 +193,7 @@ public class FillSurvey extends AppCompatActivity {
     }
 
     public void updateUI() {
+        mQuestionListView = findViewById(R.id.question_list);
         SQLiteDatabase mDB = mHelper.getReadableDatabase();
         String whereClause = Question.COLUMN_SURVEY_TITLE + " = ?";
         String[] whereArgs = new String[]{mJudulSurvey.getText().toString()};
