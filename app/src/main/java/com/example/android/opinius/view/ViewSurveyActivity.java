@@ -24,8 +24,6 @@ import java.util.List;
 public class ViewSurveyActivity extends AppCompatActivity {
     SQLiteDatabase mDB;
 
-    private static final String LOG_TAG = MainActivity.class.getSimpleName();
-
     private SurveyDBHelper mHelper;
     private ListView mSurveyList;
     private ArrayAdapter<Question> mAdapter;

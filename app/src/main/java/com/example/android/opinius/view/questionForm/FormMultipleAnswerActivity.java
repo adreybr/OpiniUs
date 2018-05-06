@@ -77,16 +77,16 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
         boolean validation = true;
 
         if (mQuestionContent.getText().length() == 0) {
-            mQuestionContent.setError("Pertanyaan wajib diisi");
+            mQuestionContent.setError("Question is required");
             validation = false;
         }
 
         if (listAnswer.size() < 2) {
             if (listAnswer.size() == 0) {
-                mAnswerChoiceInput.setError("Masukkan pilihan jawaban");
+                mAnswerChoiceInput.setError("Answer option(s) required");
                 validation = false;
             } else {
-                mAnswerChoiceInput.setError("Pilihan jawaban minimal 2");
+                mAnswerChoiceInput.setError("At least 2 answer options needed");
                 validation = false;
             }
         }
@@ -115,7 +115,7 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
             if (listAnswer.size() > 0) {
                 for (int i = 0; i < listAnswer.size(); i++) {
                     if (addChoice.equals(listAnswer.get(i))) {
-                        mAnswerChoiceInput.setError("Pilihan jawaban sudah ada");
+                        mAnswerChoiceInput.setError("This option already exists");
                         validation = false;
                         break;
                     } else {
@@ -137,7 +137,7 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
                 mAnswerChoiceInput.setText("");
             }
         } else {
-            mAnswerChoiceInput.setError("Pilihan jawaban tidak boleh kosong");
+            mAnswerChoiceInput.setError("Answer choices can't be null");
         }
 
     }

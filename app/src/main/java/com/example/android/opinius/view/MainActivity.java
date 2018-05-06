@@ -88,8 +88,10 @@ public class MainActivity extends AppCompatActivity {
                                 mHelper.deleteDatabase(context);
                                 updateUI();
                                 toggleEmptySurvey();
+                                Toast.makeText(context, "All Survey Successfully Deleted", Toast.LENGTH_SHORT).show();
                             }
                         }).create().show();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -102,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
         final AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
-                .setPositiveButton("SIMPAN", null)
-                .setNegativeButton("BATAL", null)
+                .setPositiveButton("SAVE", null)
+                .setNegativeButton("CANCEL", null)
                 .create();
 
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -120,14 +122,14 @@ public class MainActivity extends AppCompatActivity {
 
                         for (int i = 0; i < localQuestion.size(); i++) {
                             if (localQuestion.get(i).getSurveyTitle().equals(mJudul.getText().toString())) {
-                                mJudul.setError("Nama Survey sudah terpakai");
+                                mJudul.setError("Survey name already taken");
                                 validation = false;
                                 break;
                             }
                         }
 
                         if (mJudul.getText().toString().equals("")) {
-                            mJudul.setError("Wajib diisi..");
+                            mJudul.setError("This field required..");
                             validation = false;
                         }
 
@@ -151,13 +153,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 101) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "Survey Baru berhasil disimpan", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "New Survey successfully saved", Toast.LENGTH_LONG).show();
                 updateUI();
                 toggleEmptySurvey();
             }
         } else if (requestCode == 109) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "Survey berhasil diisi", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Survey successfully filled", Toast.LENGTH_LONG).show();
                 updateUI();
                 toggleEmptySurvey();
             }

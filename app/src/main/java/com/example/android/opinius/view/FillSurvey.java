@@ -108,7 +108,7 @@ public class FillSurvey extends AppCompatActivity {
                 case Question.TYPE_SHORT_ANSWER:
                     EditText editText = vi.itemView.findViewById(R.id.answer_input_short);
                     if (editText.getText().toString().equals("")) {
-                        editText.setError("Wajib diisi...");
+                        editText.setError("This field required");
                         validation = false;
                     } else {
                         answer = editText.getText().toString();
@@ -120,7 +120,7 @@ public class FillSurvey extends AppCompatActivity {
                     RadioGroup radioGroup = vi.itemView.findViewById(R.id.single_answer_radiogroup);
                     RadioButton radioButton = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                     if (radioButton == null) {
-                        question.setError("Wajib diisi...");
+                        question.setError("This field required");
                         validation = false;
                     } else {
                         question.setError(null);
@@ -143,7 +143,7 @@ public class FillSurvey extends AppCompatActivity {
                         }
                     }
                     if (answer.length() == 0) {
-                        textView.setError("Wajib diisi...");
+                        textView.setError("This field required");
                         validation = false;
                     } else {
                         textView.setError(null);
@@ -164,7 +164,7 @@ public class FillSurvey extends AppCompatActivity {
         }
 
         if (!validation) {
-            Toast.makeText(this, "Isi Semua Pertanyaan!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fill all the question(s)!", Toast.LENGTH_SHORT).show();
         } else {
 //            Toast.makeText(this, "Hasil Survey telah disimpan..", Toast.LENGTH_SHORT).show();
             Intent replyIntent = new Intent();

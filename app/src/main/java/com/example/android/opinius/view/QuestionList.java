@@ -82,7 +82,7 @@ public class QuestionList extends AppCompatActivity {
                     finish();
                     return true;
                 } else {
-                    Toast.makeText(this, "Tambahkan Pertanyaan terlebih dahulu..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Please add question(s)", Toast.LENGTH_SHORT).show();
                     return super.onOptionsItemSelected(item);
                 }
             default:
@@ -95,7 +95,7 @@ public class QuestionList extends AppCompatActivity {
         final View dialogLayout = inflater.inflate(R.layout.dialog_question_type, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
-                .setPositiveButton("LANJUT", new DialogInterface.OnClickListener() {
+                .setPositiveButton("NEXT", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -170,7 +170,7 @@ public class QuestionList extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 202) {
             if (resultCode == RESULT_OK) {
-                Toast.makeText(getApplicationContext(), "Pertanyaan berhasil disimpan", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Question successfully saved", Toast.LENGTH_SHORT).show();
                 Intent replyIntent = new Intent();
                 setResult(RESULT_OK, replyIntent);
                 updateUI();
