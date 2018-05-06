@@ -2,7 +2,6 @@ package com.example.android.opinius.view.questionForm;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -78,12 +77,18 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
         boolean validation = true;
 
         if (mQuestionContent.getText().length() == 0) {
-            mQuestionContent.setError("Question is required!");
+            mQuestionContent.setError("Pertanyaan wajib diisi");
             validation = false;
         }
-        if (listAnswer.size() == 0) {
-            mAnswerChoiceInput.setError("Answer Choices is required");
-            validation = false;
+
+        if (listAnswer.size() < 2) {
+            if (listAnswer.size() == 0) {
+                mAnswerChoiceInput.setError("Masukkan pilihan jawaban");
+                validation = false;
+            } else {
+                mAnswerChoiceInput.setError("Pilihan jawaban minimal 2");
+                validation = false;
+            }
         }
 
         if (validation) {
@@ -104,20 +109,35 @@ public class FormMultipleAnswerActivity extends AppCompatActivity {
     public void addCheckboxButton() {
         mAnswerChoiceInput = findViewById(R.id.answer_input_multiple);
         String addChoice = mAnswerChoiceInput.getText().toString();
+        boolean validation = true;
+
         if (!addChoice.equals("")) {
-            listAnswer.add(addChoice);
-            mAnswerListView = findViewById(R.id.checkbox_group);
+            if (listAnswer.size() > 0) {
+                for (int i = 0; i < listAnswer.size(); i++) {
+                    if (addChoice.equals(listAnswer.get(i))) {
+                        mAnswerChoiceInput.setError("Pilihan jawaban sudah ada");
+                        validation = false;
+                        break;
+                    } else {
+                        validation = true;
+                    }
+                }
+            }
+            if (validation) {
+                mAnswerChoiceInput.setError(null);
+                listAnswer.add(addChoice);
+                mAnswerListView = findViewById(R.id.checkbox_group);
 
-            LayoutInflater mInflater = LayoutInflater.from(this);
+                LayoutInflater mInflater = LayoutInflater.from(this);
 
-            View view = mInflater.inflate(R.layout.checkbox_item, mAnswerListView, false);
-            CheckBox option = view.findViewById(R.id.checkbox_option);
-            option.setText(addChoice);
-            mAnswerListView.addView(view);
-            mAnswerChoiceInput.setText("");
-
+                View view = mInflater.inflate(R.layout.checkbox_item, mAnswerListView, false);
+                CheckBox option = view.findViewById(R.id.checkbox_option);
+                option.setText(addChoice);
+                mAnswerListView.addView(view);
+                mAnswerChoiceInput.setText("");
+            }
         } else {
-            mAnswerChoiceInput.setError("Answer can't be null");
+            mAnswerChoiceInput.setError("Pilihan jawaban tidak boleh kosong");
         }
 
     }
