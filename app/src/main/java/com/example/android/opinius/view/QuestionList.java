@@ -95,7 +95,7 @@ public class QuestionList extends AppCompatActivity {
         final View dialogLayout = inflater.inflate(R.layout.dialog_question_type, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogLayout)
-                .setPositiveButton("SIMPAN", new DialogInterface.OnClickListener() {
+                .setPositiveButton("LANJUT", new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

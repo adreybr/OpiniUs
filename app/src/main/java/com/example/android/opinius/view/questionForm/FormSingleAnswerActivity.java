@@ -3,8 +3,6 @@ package com.example.android.opinius.view.questionForm;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -76,13 +74,19 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
         boolean validation = true;
 
         if (mQuestionContent.getText().length() == 0) {
-            mQuestionContent.setError("Question is required!");
+            mQuestionContent.setError("Pertanyaan wajib diisi");
             validation = false;
         }
-        if (listAnswer.size() == 0) {
-            mAnswerChoiceInput.setError("Answer Choices is required");
-            validation = false;
+        if (listAnswer.size() < 2) {
+            if (listAnswer.size() == 0) {
+                mAnswerChoiceInput.setError("Masukkan pilihan jawaban");
+                validation = false;
+            } else {
+                mAnswerChoiceInput.setError("Pilihan jawaban minimal 2");
+                validation = false;
+            }
         }
+
 
         if (validation) {
             String answerList = "";
@@ -102,16 +106,33 @@ public class FormSingleAnswerActivity extends AppCompatActivity {
     public void addRadioButtons() {
         mAnswerChoiceInput = findViewById(R.id.answer_input_single);
         String addChoice = mAnswerChoiceInput.getText().toString();
-        if (!addChoice.equals("")) {
-            listAnswer.add(addChoice);
-            mRadioGroup = findViewById(R.id.radio_group);
+        boolean validation = true;
 
-            RadioButton option = new RadioButton(this);
-            option.setText(addChoice);
-            mRadioGroup.addView(option);
-            mAnswerChoiceInput.setText("");
+        if (!addChoice.equals("")) {
+
+            if (listAnswer.size() > 0) {
+                for (int i = 0; i < listAnswer.size(); i++) {
+                    if (addChoice.equals(listAnswer.get(i))) {
+                        mAnswerChoiceInput.setError("Pilihan jawaban sudah ada");
+                        validation = false;
+                        break;
+                    } else {
+                        validation = true;
+                    }
+                }
+            }
+
+            if (validation) {
+                listAnswer.add(addChoice);
+                mRadioGroup = findViewById(R.id.radio_group);
+
+                RadioButton option = new RadioButton(this);
+                option.setText(addChoice);
+                mRadioGroup.addView(option);
+                mAnswerChoiceInput.setText("");
+            }
         } else {
-            mAnswerChoiceInput.setError("Answer can't be null");
+            mAnswerChoiceInput.setError("Pilihan jawaban tidak boleh kosong");
         }
 
     }
