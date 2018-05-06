@@ -24,4 +24,11 @@
         android:textSize="@dimen/survey_title"
         android:textStyle="bold" />
 
+    <ImageView
+        android:id="@+id/question_image"
+        android:layout_width="100dp"
+        android:layout_height="138dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/surveyy" />
 </RelativeLayout>
